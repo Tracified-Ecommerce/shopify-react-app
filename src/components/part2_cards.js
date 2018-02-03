@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import CollapaseCards from './collapase';
 import * as axios from 'axios';
 import { Container, Row, Col} from 'reactstrap';
-import { Thumbnail, Card, Page, List, Badge } from '@shopify/polaris';
+import { Thumbnail, Card, Page, List } from '@shopify/polaris';
 import Loading from './Loading';
-
 const QRCode = require('qrcode.react');
 
 class Part2Cards extends Component {
@@ -14,7 +13,6 @@ class Part2Cards extends Component {
             orders: [],
             products: {},
             isOrderListLoading: true,
-            search: ''
         };
     }
 
@@ -35,12 +33,6 @@ class Part2Cards extends Component {
             });
     }
 
-    updateSearch(event){
-        this.setState({
-            search: event.target.value.substr(0, 20)
-        });
-    }
-            
 
     render() {
 
@@ -49,15 +41,13 @@ class Part2Cards extends Component {
         }
         else{
         // All the order details
-
-        let orders = this.state.orders.filter(
-            (order) => {
-                return order.name.indexOf(this.state.search) !== -1;
-            }
-         );
-
-       // var orders = this.state.orders;
+        var orders = this.state.orders;
         console.log(orders);
+            
+        // ..............................................................
+        //declare customer variable (changed code)
+        var customer;
+        // ..............................................................
 
         var orderArray = [];
         orders.forEach((order) => {
@@ -73,8 +63,8 @@ class Part2Cards extends Component {
                 });
             });
 
-            const customer = order.customer.first_name + " " + order.customer.last_name;
-
+            customer = order.customer.first_name + " " + order.customer.last_name;
+            
             orderArray.push({
                 id: order.id,
                 order_number: order.order_number,
@@ -82,37 +72,27 @@ class Part2Cards extends Component {
                 customer: customer,
                 created_at: order.created_at.substring(0, 10)
             });
+
+            console.log("customer name: "+customer);                        
         });
 
-        console.log(orderArray);
+        // .......................................................................................................
+            // check whether the customer name is there in create order in admin view. if its not there make the customer name is displays as admin. (changed code)
+            if (customer==null){
+                customer="Admin";
+                console.log("customer name has turn into Admin !!!!");
+            }
+            else{
+                console.log("customer name is there in the create order in admin view.");
+            }        
+            // .......................................................................................................
 
-        var inputStyle={
-            marginLeft: '2%',
-            float: 'left',
-            padding: '1%',
-            fontSize: '17px',
-            marginTop: '2%',
-            borderStyle: 'dotted',
-            marginBottom:'2%'
-        }
+        
+        console.log(orderArray);
 
         return (
             <Page title="Unfulfilled Orders" separator>
-           
-                <div>
-                    <Card>
-                        {/* <div className="searchBar"> */}
-                             <input
-                             type="text"
-                             placeholder="Enter the order id"
-                             value={this.state.search}
-                             onChange={this.updateSearch.bind(this)}
-                             style={inputStyle}
-                             />
-                        {/* </div> */}
-                      </Card>
-                    </div>
-               
+
                 {orderArray.map((order, index) => {
                     const qrValue = order.order_number.toString();
                     const title = "Order ID: " + order.order_number;

@@ -60,6 +60,11 @@ class FulfilledOrdersPage extends Component {
                }
             );
             console.log(orders);
+            // ..............................................................
+            //declare customer variable (changed code)
+            var customer;
+            // ..............................................................
+
             var orderArray = [];
             orders.forEach((order) => {
                 var items = order.line_items;
@@ -74,7 +79,7 @@ class FulfilledOrdersPage extends Component {
                     });
                 });
 
-                const customer = order.customer.first_name + " " + order.customer.last_name;
+                customer = order.customer.first_name + " " + order.customer.last_name;
 
                 orderArray.push({
                     id: order.id,
@@ -85,6 +90,19 @@ class FulfilledOrdersPage extends Component {
                 });
             });
            
+           
+            // .......................................................................................................
+            // check whether the customer name is there in create order in admin view. if its not there make the customer name is displays as admin. (changed code)
+            if (customer==null){
+                customer="Admin";
+                console.log("customer name has turn into Admin !!!!");
+            }
+            else{
+                console.log("customer name is there in the create order in admin view.");
+            }        
+            // .......................................................................................................
+
+            
             var inputStyle1={
                 marginLeft: '2%',
                 float: 'left',
