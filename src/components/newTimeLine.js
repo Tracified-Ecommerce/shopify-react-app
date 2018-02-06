@@ -48,17 +48,6 @@ class TraceTimeLine extends Component {
         //     fontSize: 16
         // };
 
-        // var line = {
-        //     "margin": "90% 35% 35% 35%",
-        //     "border-size": "0.5px",
-        //     "border-width": "thin",
-        //     "border-style": "solid",
-        //     "border-color": "black",
-        //     "height": "500px",
-        //     "width": "0%"
-        // }
-
-        //OLD CODE ----------------------------
 
 
         if (this.state.istimelineLoading) {
