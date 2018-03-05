@@ -5,6 +5,7 @@ import * as axios from 'axios';
 import { Container, Row, Col} from 'reactstrap';
 import { Thumbnail, Card, Page, List, Badge, Button, Stack, RadioButton, TextContainer } from '@shopify/polaris';
 import Loading from './Loading';
+import ErrorMsg from './errorMsg';
 
 const QRCode = require('qrcode.react');
 
@@ -22,6 +23,7 @@ class Part2Cards extends Component {
             isExpanded : true,
             isCheckedCus:false,
             isCheckedOrd:true,
+            isError:false,
         };
     }
 
@@ -65,8 +67,10 @@ class Part2Cards extends Component {
                     cardStateArray: arr
                 });
             }).catch((err) => {
-                // set isError as true
-                //set isOrderListLoading as false
+                this.setState({ 
+                    isError:true,
+                    isOrderListLoading:false
+                });
             });
     }
 
@@ -89,10 +93,7 @@ class Part2Cards extends Component {
             isCheckedCus: false,
             isCheckedOrd:true
 
-        });
-        
-
-    } 
+        });} 
     
     clickCustomer(){
         console.log("Nishaniii");
@@ -103,9 +104,6 @@ class Part2Cards extends Component {
             isCheckedOrd:false
 
         });
-
-
-    
     } 
 
     render() {
@@ -114,7 +112,11 @@ class Part2Cards extends Component {
 
         if(this.state.isOrderListLoading){
             return <Loading/> ;
-        } // else if(t.s.iserror) { // return <ErrorComponent>; }
+        } 
+        else if(this.state.isError){
+            return <ErrorMsg errorStatus="404" errorMessage="Page not found"/>
+        }
+        
         else{
         // All the order details
 
