@@ -21,7 +21,7 @@ class Part2Cards extends Component {
             search: '',
             isExpanded : true,
             isCheckedCus:false,
-            isCheckedOrd:true
+            isCheckedOrd:true,
         };
     }
 
@@ -64,6 +64,9 @@ class Part2Cards extends Component {
                     isOrderListLoading: false,
                     cardStateArray: arr
                 });
+            }).catch((err) => {
+                // set isError as true
+                //set isOrderListLoading as false
             });
     }
 
@@ -111,7 +114,7 @@ class Part2Cards extends Component {
 
         if(this.state.isOrderListLoading){
             return <Loading/> ;
-        }
+        } // else if(t.s.iserror) { // return <ErrorComponent>; }
         else{
         // All the order details
 

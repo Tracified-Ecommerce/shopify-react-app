@@ -4,6 +4,8 @@ import '@shopify/polaris/styles.css';
 import SubTabs from './subTabs';
 import Installation from './Install';
 import Mapping from './ProductMappingModule/ProductMapping';
+import ErrorMsg from './errorMsg';
+
 
 class TabsView extends Component {
   constructor(props) {
@@ -39,6 +41,11 @@ class TabsView extends Component {
         title: 'Configuration',
         panelID: 'panel2',
       },
+      {
+        id: 'tab4',
+        title: 'Error msg',
+        panelID: 'panel4',
+      },
     ];
 
     const tabPanels = [
@@ -55,6 +62,11 @@ class TabsView extends Component {
       (
         <Tabs.Panel id="panel3">
           <Installation/>
+        </Tabs.Panel>
+      ),
+      (
+        <Tabs.Panel id="panel4">
+          <ErrorMsg errorStatus="404" errorMessage="Page not found"/>
         </Tabs.Panel>
       ),
     ];
