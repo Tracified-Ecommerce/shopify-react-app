@@ -25,3 +25,20 @@
     font-weight: bolder !important;
     display: inline-block;
 }
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.table.table-striped thread tr{
+    position: fixed;
+    width: 100% !important;
+/*     padding-left: 10% */
+}
+
+.saveBtn .col-sm-10 .Polaris-Card{
+    width: 150% !important;
+    padding-bottom: 5%;
+}

@@ -35,7 +35,7 @@ import { setTimeout } from 'timers';
 import { request } from 'http';
 import { Row, Col, Container} from 'reactstrap';
 import Loading from '../Loading';
-
+import { StickyContainer, Sticky } from 'react-sticky';
 
 
 class ProductMapping extends Component {
@@ -230,6 +230,10 @@ class ProductMapping extends Component {
   render() {
     const { productName, tracifiedItemID, tracifiedItemtitle, permission, isTraceListLoading, isProductListLoading } = this.state;
 
+    var stickyStyle={
+      width:'100%',
+    }
+
     if (isTraceListLoading || isProductListLoading) {
       return (
               <Loading/>
@@ -241,78 +245,78 @@ class ProductMapping extends Component {
 
 
     return (
+      <StickyContainer>
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
 
-        <div className="saveBtn">
-        <Row>
-          <Col sm="10">
-          </Col>
-          <Col sm="2">
-            <Button primary onClick={this.onSubmit}>Save</Button>
-          </Col>
-        </Row>
-        </div>
+        
+          
+              
+        <Sticky topOffset={80}>
+          {
+            ({
+              style,
 
-        <Card title="Product Mapping Details">
-          <br />
-          <form>
-            <table className="table table-striped">
-            
-            {/*Head section*/}
-            {/*<div className="headSection">              */}
-              <thead>
-                <tr>
-                  <td >Product Name</td>
-                  <td >Product Item ID</td>
-                  <td >Tracified Item title</td>
-                  <td >Permission</td>
-                </tr>
-              </thead>
-              {/*</div>*/}
-              {/*end of head section*/}
-              <tbody>
+              // the following are also available but unused in this example
+              isSticky,
+              wasSticky,
+              distanceFromTop,
+              distanceFromBottom,
+              calculatedHeight
+            }) => {
+              return (
+                <header style={style}>
+                   
+                </header>
+              )
+            }
+          }
+          <div className="saveBtn">
+          <Row>
+            <Col sm="10">
+            </Col>
+            <Col sm="2">
+              <Button primary onClick={this.onSubmit}>Save</Button>
+            </Col>
+          </Row>
+          </div>
 
-                {this.tabRow()}
-
+          <Card title="Product Mapping Details">
+            <br />
+            <form>
+              <table className="table table-striped">
+              
+              {/*Head section*/}
+              {/*<div className="headSection">              */}
+                <thead>
+                  <tr>
+                    <td >Product Name</td>
+                    <td >Product Item ID</td>
+                    <td >Tracified Item title</td>
+                    <td >Permission</td>
+                  </tr>
+                </thead>
+                {/*</div>*/}
+                {/*end of head section*/}
+                <tbody>
+                   {this.tabRow()}
               </tbody>
-            </table>
-            {/*<Row>
-              <Col sm="10">
-              </Col>
-              <Col sm="2">
-                <Button primary onClick={this.onSubmit}>Save</Button>
-              </Col>
-            </Row>*/}
-          </form>
-        </Card>
-      </div>
-
+            </table>            
+            </form>
+          </Card>
       
+      
+        </Sticky>
+      </div>      
+      </StickyContainer> 
     );
     <ProductMapping /> , document.getElementById('productmapping')
     
     console.log('document thing works');
-
-    // javascript code to sticky nav bar
-    {
-        window.onscroll = function() {myFunction()};
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-          if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-          } else {
-            navbar.classList.remove("sticky")
-          }
-        }
-      }
-      // end of sticky nav bar code
+    
   }
-  
+
 
 }
 
