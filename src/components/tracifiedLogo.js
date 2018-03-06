@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TraciLogo from '../assets/TracifiedLogo.png';
+import TraciLogo1 from '../assets/TracifiedLogo.png';
 
 class TracifiedLogo extends Component{
     render(){
@@ -14,7 +14,7 @@ class TracifiedLogo extends Component{
 
         return(
             <div style={backStyle}>
-                <img src={TraciLogo} style={logoStyle}/>
+                <img src={TraciLogo1} style={logoStyle}/>
             </div>
         );
     }

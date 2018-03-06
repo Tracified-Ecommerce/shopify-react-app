@@ -1,5 +1,3 @@
-// ProductMapping.js
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ProductMappingService from './ProductMappingService';
@@ -22,23 +20,21 @@ import {
   Heading,
   PageActions,
   Select,
-  Checkbox,
-  Spinner, 
-  DisplayText,
-  TextStyle 
+  Checkbox
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import './AppMP.css';
-import './ProductMapping.css';
+// import './ProductMapping.css';
 import { setTimeout } from 'timers';
-// import Spinner from '../../lib/components/Spinner';
+import Spinner from '../../lib/components/Spinner';
 import { request } from 'http';
-import { Row, Col, Container} from 'reactstrap';
-import Loading from '../Loading';
+import { Row, Col } from 'reactstrap';
+import Loading from '../Loading'
 
 
 
-class ProductMapping extends Component {
+
+class ProductMapFloating extends Component {
 
   constructor(props) {
     super(props);
@@ -66,7 +62,7 @@ class ProductMapping extends Component {
       this.state.mapping[shopifyProductID][1] = permission;
     }
 
-    console.log(this.state.permission);
+    console.log("updated permissions: "+this.state.permission);
   }
   updateMapping(tracifiedItemID, shopifyProductID) {
     console.log(shopifyProductID);
@@ -77,29 +73,29 @@ class ProductMapping extends Component {
       this.state.mapping[shopifyProductID] = [tracifiedItemID, false];
     }
 
-    console.log(this.state.mapping);
+    console.log("updated mapping :"+this.state.mapping);
 
   }
 
-  onItemChange(tracifiedItemID, shopifyProductID) {
-
-    if (this.state.mapping.hasOwnProperty(shopifyProductID)) {
-      if (!(tracifiedItemID == "noItem")) {
+  onItemChange(tracifiedItemID, shopifyProductID){
+    
+    if(this.state.mapping.hasOwnProperty(shopifyProductID)) {
+      if(!(tracifiedItemID=="noItem")){        
         this.state.mapping[shopifyProductID][0] = tracifiedItemID;
       }
-      else {
+      else{
         let tempMapping = this.state.mapping;
         delete tempMapping[shopifyProductID];
         this.state.mapping = tempMapping;
       }
     }
-    else {
+    else{
       this.state.mapping[shopifyProductID] = [tracifiedItemID, false];
     }
-    console.log(this.state.mapping);
+    console.log("item was changed :"+this.state.mapping);
   }
-
-  onPermissionChange(permission, shopifyProductID) {
+  
+  onPermissionChange(permission, shopifyProductID){
     console.log(this.state.mapping[shopifyProductID]);
     console.log(permission);
     console.log(shopifyProductID);
@@ -109,16 +105,22 @@ class ProductMapping extends Component {
 
 
   componentDidMount() {
-    axios.get('https://tracified-react-api.herokuapp.com/shopify/config/mapping')
-      .then(response => {
+    axios.get('/shopify/config/mapping')
+    .then(response => {
+      if(response.status == 200){
+        console.log("inside if");
         this.setState({
-          initialMapping: response.data,
-          mapping: response.data
+          initialMapping:response.data,
+          mapping:response.data        
         });
-        console.log(this.state.initialMapping);
+      }else{
+        console.log("outside if");
+      }
+      console.log("response status:"+response.status+" response data: "+JSON.stringify(response.data));
+      console.log("mapping is :"+JSON.stringify(this.state.mapping));
 
-      });
-    axios.get('https://tracified-react-api.herokuapp.com/shopify/shop-api/products')
+    });
+    axios.get('/shopify/shop-api/products')
       .then(response => {
         var products = response.data.products;
 
@@ -146,29 +148,21 @@ class ProductMapping extends Component {
 
     axios({
       method: 'get',
-      url: 'https://tracified-react-api.herokuapp.com/shopify/tracified/item-list',      headers: {
+      url: '/shopify/tracified/item-list',
+      headers: {
         'Content-Type': 'text/plain;charset=utf-8',
       },
     })
       .then(response_ => {
         this.setState({ tracedata: response_.data });
-        console.log("mapping response sttus : " + response_.status);
-        console.log("mapping response data : " + JSON.stringify(response_.data));
 
-        let responseTxt = "";
-        for ( const obj of response_.data) {
-          const itemname = obj.itemName.replace(/\s/g, "-");
-          responseTxt += obj.itemID + " : " + itemname + " , ";
-      }
-
-      this.setState({ tracedata: responseTxt });
         if (response_.status == 200) {
           this.setState({ isTraceListLoading: false });
 
         }
       })
       .catch(function (error) {
-        console.log("error gettin mapping list :" + error);
+        console.log(error);
       })
   }
 
@@ -210,18 +204,11 @@ class ProductMapping extends Component {
      * means it should look like " mapping: this.state.mapping"
      * make sure that state.mapping holds the current selections
      */
-    axios.post('https://tracified-react-api.herokuapp.com//shopify/config/mapping', { mapping })
+    axios.post('/shopify/config/mapping', { mapping })
       .then((result) => {
         alert("Mapping Successfully Saved!");
-        console.log(result);
+        console.log( "Result :"+result);
       });
-
-      // axios({
-      //   method: 'post',
-      //   url: 'https://tracified-local-test.herokuapp.com/shopify/tracified/item-list',      headers: {
-      //     'Content-Type': 'text/plain;charset=utf-8',
-      //   },
-      // })
 
   }
 
@@ -231,9 +218,7 @@ class ProductMapping extends Component {
     const { productName, tracifiedItemID, tracifiedItemtitle, permission, isTraceListLoading, isProductListLoading } = this.state;
 
     if (isTraceListLoading || isProductListLoading) {
-      return (
-              <Loading/>
-      );
+      return <Loading/> ;
       console.log('spinner');
     } else {
       console.log('not spinner');
@@ -253,67 +238,43 @@ class ProductMapping extends Component {
             <Button primary onClick={this.onSubmit}>Save</Button>
           </Col>
         </Row>
-        </div>
+        {/*</div>*/}
 
+        <div className="product-Mapping">
         <Card title="Product Mapping Details">
           <br />
           <form>
             <table className="table table-striped">
-            
-            {/*Head section*/}
-            {/*<div className="headSection">              */}
-              <thead>
-                <tr>
+              <thead className="headingsThread">
+                <tr className="headingsTr">
                   <td >Product Name</td>
                   <td >Product Item ID</td>
                   <td >Tracified Item title</td>
                   <td >Permission</td>
                 </tr>
               </thead>
-              {/*</div>*/}
-              {/*end of head section*/}
               <tbody>
 
                 {this.tabRow()}
 
               </tbody>
             </table>
-            {/*<Row>
-              <Col sm="10">
-              </Col>
-              <Col sm="2">
-                <Button primary onClick={this.onSubmit}>Save</Button>
-              </Col>
-            </Row>*/}
+            <Row>
+                  <Col sm="10">
+                  </Col>
+                  <Col sm="2">
+                    {/* <Button primary onClick={this.onSubmit}>Save</Button> */}
+                  </Col>
+                </Row>
           </form>
         </Card>
+        </div>
       </div>
-
-      
+      </div>
     );
-    <ProductMapping /> , document.getElementById('productmapping')
-    
-    console.log('document thing works');
-
-    // javascript code to sticky nav bar
-    {
-        window.onscroll = function() {myFunction()};
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-          if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-          } else {
-            navbar.classList.remove("sticky")
-          }
-        }
-      }
-      // end of sticky nav bar code
+    <ProductMapFloating /> , document.getElementById('productmapping')
   }
-  
 
 }
 
-export default ProductMapping;
+export default ProductMapFloating;

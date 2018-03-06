@@ -66,7 +66,8 @@ class TabsView extends Component {
       ),
       (
         <Tabs.Panel id="panel4">
-          <ErrorMsg errorStatus="404" errorMessage="Page not found"/>
+          <ErrorMsg  errorStatus="404" errorMessage="Page not found"/>
+          {/*error={[{}]}*/}
         </Tabs.Panel>
       ),
     ];
