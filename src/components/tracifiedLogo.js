@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TraciLogo from '../assets/TracifiedLogo.png';
+import TraciLogo from '../assets/tracified_logo.jpg';
 
 class TracifiedLogo extends Component{
     render(){

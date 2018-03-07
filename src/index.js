@@ -12,7 +12,7 @@ import Tabs from './components/TabsView';
 import FulfilledOrdersPage from './components/FulfilledOrdersPage';
 import AccountVerify from './components/AccountVerify';
 import TraceTimeLine from './components/TraceTimeLine';
-import Logo from './components/tracifiedLogo';
+import Logo from './components/TracifiedLogo';
 import ProductMapping from './components/ProductMappingModule/ProductMapping';
 import Install from './components/Install';
 import '@shopify/polaris/styles.css';

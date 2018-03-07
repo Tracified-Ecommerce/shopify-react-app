@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import TraciLogo from '../assets/TracifiedLogo.png';
+import AlertBox from "./AlertBox";
 
 class ErrorMsg extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isOpen: false,
+        }
     }
+
+    toggleModal = () => {
+        this.setState({
+          isOpen: !this.state.isOpen
+        });
+      }
 
     render() {
         var logoStyle={
@@ -15,12 +25,22 @@ class ErrorMsg extends Component {
         }
 
         return (
-            <div className="errorMsg-page">
-                <div className="banner">
+            <div className="App">
+                <button onClick={this.toggleModal}>
+                Open the AlertBox
+                </button>
+
+                <AlertBox show={this.state.isOpen}
+                onClose={this.toggleModal}>
+                Here's some content for the AlertBox
+                </AlertBox>
+            {/* </div> */}
+            {/* <div className="errorMsg-page"> */}
+                {/* <div className="banner"> */}
                     {/*<img src={TraciLogo} style={logoStyle}/>*/}
-                </div>
-                <p className="status">{this.props.errorStatus}</p>
-                <p className="msg">{this.props.errorMessage}</p>
+                {/* </div> */}
+                {/* <p className="status">{this.props.errorStatus}</p> */}
+                {/* <p className="msg">{this.props.errorMessage}</p> */}
             </div>
         );
     }
