@@ -24,6 +24,20 @@ class TabsView extends Component {
 
   render() {
     const {selectedTab} = this.state;
+    
+    const error1 = {
+      errorStatus:"404",
+      errorMessage:"Page not found"
+    };
+    const error2 = {
+      errorStatus:"405",
+      errorMessage:"Five found five"
+    };
+
+    let errorArray = [];
+
+    errorArray.push(error1);
+    errorArray.push(error2);
 
     const tabs = [
       {
@@ -66,7 +80,7 @@ class TabsView extends Component {
       ),
       (
         <Tabs.Panel id="panel4">
-          <ErrorMsg errorStatus="404" errorMessage="Page not found"/>
+          <ErrorMsg errors={errorArray}/>
         </Tabs.Panel>
       ),
     ];
