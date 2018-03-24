@@ -61,6 +61,7 @@ class TabsView extends Component {
 
     return (
       <div>
+        <p>{this.props.shopType}</p>
         <Tabs
           selected={selectedTab}
           tabs={tabs}
