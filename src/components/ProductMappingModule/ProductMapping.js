@@ -248,16 +248,13 @@ class ProductMapping extends Component {
       console.log('not spinner');
     }
 
-var saveBtnStyle={
-      // borderRadius: '50%',
-      // marginLeft:'75%',
-      // position:'fixed',
-      // backgroundColor:'#5b69c3'
+var saveBtnStyle={     
       position:'fixed',
       width:'60px',
       height:'60px',
       bottom:'40px',
-      right:'40px',
+      right:'57%',
+      // zindex: 'initial',
       backgroundColor:'#5b69c3',
       color:'#FFF',
       borderRadius:'50px',

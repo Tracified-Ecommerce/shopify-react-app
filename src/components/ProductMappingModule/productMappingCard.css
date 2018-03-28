@@ -1,7 +1,7 @@
 
-.cardProductMapping  td{
-    /*width: 200% !important;*/
-}
+.cardProductMapping td{
+        width: 300% !important;
+    }   
 
 .tblHeaders .col-sm-3,.tblHeaders .col-sm-2,tblHeaders .col-sm-5{
      /*padding-left: 0% !important; */
@@ -17,17 +17,17 @@
     padding-top: 2%;
 }
 .Pid{
-    margin-left: -4%;
+    margin-left: -10% !important;
 }
 .tTitle{
-    margin-left: 2%;
+    margin-left: 1% !important;
 }
 
 
 .cardProductMapping {
     position: fixed;
     z-index: 50;
-    width: 250%;
+    width: 300%;
     white-space: nowrap; 
 /*     width: 0em;  */
     overflow: hidden;
@@ -44,10 +44,161 @@
     width: 40%;
 }
 
-.saveBtn .Polaris-Button--primary{
-    margin-left: -40% !important;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-       text-overflow: ellipsis; 
-    white-space: nowrap; 
+.saveBtn {
+    right:'57%',
+}
+
+/*.tblHeaders{
+    margin-left: -33%;
+    width: 200%;
+}*/
+/* Media Queries */
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) { 
+    /*.cardProductMapping td{
+        width: 200% !important;
+    }    
+    
+    .cardProductMapping {
+        position: fixed;
+        z-index: 50;
+        width: 500% !important;
+        white-space: nowrap; 
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis; 
+        padding-left: 10%;
+    }*/
+    
+    /*.saveBtn .Polaris-Button--primary{
+        margin-left: -40% !important;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+           text-overflow: ellipsis; 
+        white-space: nowrap; 
+    }*/
+    
+    /*.Pid{
+    margin-left: -10% !important;
+}
+.tTitle{
+    margin-left: 1% !important;
+}*/
+.pName,.Pid,.tTitle,.Permission{
+    margin-left: -7% !important;
+    font-size: 100% !important;
+}
+      
+    .MappingDetails{
+        padding-top: 1%;
+        padding-left: 2%;
+        padding-bottom: 2% !important;
+        font-size: 150% !important;
+        width: 40%;
+    }
+      
+    tbody{
+        width: 70%;
+        margin-top: 80% !important;
+    }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+
+}
+
+/* ..................................... */
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px)  { 
+    .pName,.Pid,.tTitle,.Permission{
+        margin-left: -7% !important;
+    }
+      
+    .MappingDetails{
+        padding-top: 1%;
+        padding-left: 4%;
+        padding-bottom: 2% !important;
+        font-size: 150% !important;
+        width: 40%;
+    }
+      
+    tbody td{
+        width: 10% !important;
+        font-size: 80%;
+        padding-top: 10% !important;
+    }
+      
+      .Polaris-Choice__Label{
+          font-size: 100%;
+      }
+}
+
+/* ..................................... */
+/* ----------- Galaxy S4, S5 and Note 3 ----------- */
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) {   
+     .pName,.Pid,.tTitle,.Permission{
+        margin-left: -7% !important;
+    } 
+    .MappingDetails{
+        padding-top: 1%;
+        padding-left: 4%;
+        padding-bottom: 2% !important;
+        font-size: 150% !important;
+        width: 40%;
+    }
+}
+
+/* ...................................... */
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px)  { 
+    .pName{
+        margin-left: -17% !important;
+        width: 25% !important;
+    }
+    .Pid{
+        margin-left: 10% !important;
+    }
+    .tTitle{
+        width:20% !important;
+    }
+      
+    .MappingDetails{
+        padding-top: 1%;
+        padding-left: 0%;
+        padding-bottom: 3% !important;
+        font-size: 150% !important;
+        width: 40%;
+        margin-left: -19%;
+    }
+
+    .saveBtn{
+        right: 12% !important;
+    }
+      
 }
