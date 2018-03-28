@@ -1,0 +1,53 @@
+
+.cardProductMapping  td{
+    /*width: 200% !important;*/
+}
+
+.tblHeaders .col-sm-3,.tblHeaders .col-sm-2,tblHeaders .col-sm-5{
+     /*padding-left: 0% !important; */
+/*     width: 25% !important; */
+    /*padding-bottom: 1%;
+    margin-left: -2%;
+    font-weight: bold;*/
+}
+
+.pName,.Pid,.tTitle,.Permission{
+    font-weight: bold;
+    padding-bottom: 3%;
+    padding-top: 2%;
+}
+.Pid{
+    margin-left: -4%;
+}
+.tTitle{
+    margin-left: 2%;
+}
+
+
+.cardProductMapping {
+    position: fixed;
+    z-index: 50;
+    width: 250%;
+    white-space: nowrap; 
+/*     width: 0em;  */
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis; 
+    padding-left: 4%;
+}
+
+.MappingDetails{
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-bottom: 2% !important;
+    font-size: 150% !important;
+    width: 40%;
+}
+
+.saveBtn .Polaris-Button--primary{
+    margin-left: -40% !important;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis; 
+    white-space: nowrap; 
+}

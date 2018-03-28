@@ -11,7 +11,6 @@ import {
   Page,
   FooterHelp,
   Link,
-  Button,
   FormLayout,
   TextField,
   AccountConnection,
@@ -35,9 +34,9 @@ import './ProductMapping.css';
 import { setTimeout } from 'timers';
 // import Spinner from '../../lib/components/Spinner';
 import { request } from 'http';
-import { Row, Col, Container} from 'reactstrap';
+import { Row, Col, Container,Button} from 'reactstrap';
 import Loading from '../Loading';
-
+import ProductMappingCard from './productMappingCard';
 
 
 class ProductMapping extends Component {
@@ -249,6 +248,23 @@ class ProductMapping extends Component {
       console.log('not spinner');
     }
 
+var saveBtnStyle={
+      // borderRadius: '50%',
+      // marginLeft:'75%',
+      // position:'fixed',
+      // backgroundColor:'#5b69c3'
+      position:'fixed',
+      width:'60px',
+      height:'60px',
+      bottom:'40px',
+      right:'40px',
+      backgroundColor:'#5b69c3',
+      color:'#FFF',
+      borderRadius:'50px',
+      textAlign:'center',
+      boxShadow: '2px 2px 3px #999',
+    }
+
 
     return (
       <div class="loader" id="productmapping">
@@ -256,32 +272,15 @@ class ProductMapping extends Component {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
         
           {/*<form>*/}
-            <table className="table table-striped">
-              
+            <table className="table table-striped">              
 
               <thead>
+                
                 <Sticky>
                 <Row className="cardWrapper" style={navStyle}>
-                  <div id="stickyCard">
-                <Card>
-                  <tr>
-                    <td>
-                      <p className="MappingDetails" style={{fontWeight:'bold',fontSize:'120%'}}>Product Mapping Details</p>
-                    </td>
-                    <td className="saveBtn">
-                      <Button primary onClick={this.onSubmit}>Save</Button>
-                    </td>
-                  </tr>
-                <tr >
-                  <Row className="tblHeaders">
-                    <Col sm="5" xs="5" className="pName">Product Name</Col>
-                    <Col sm="2" xs="2" className="Pid">Product Item ID</Col>
-                    <Col sm="3" xs="3"className="tTitle">Tracified Item title</Col>
-                    <Col sm="2" xs="2" className="Permission">Permission</Col>
-                  </Row>
-                </tr>
-                </Card>
-                </div>
+                  <div id="stickyCard">                
+                    <ProductMappingCard/>
+                  </div>
                 </Row>
               </Sticky>
 
@@ -294,6 +293,9 @@ class ProductMapping extends Component {
           {/*</form>*/}
         {/*</Card>*/}
         {/*</Sticky>*/}
+         <Button primary onClick={this.onSubmit} style={saveBtnStyle}>
+              Save
+            </Button>
       </div>
     );
     <ProductMapping /> , document.getElementById('productmapping')
