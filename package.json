@@ -6,6 +6,7 @@
     "@shopify/polaris": "^1.8.3",
     "axios": "^0.17.1",
     "base-64": "^0.1.0",
+    "lodash": "^4.17.5",
     "mdbootstrap": "^4.4.3",
     "mdbreact": "^4.0.0",
     "prop-types": "^15.6.0",

@@ -52,6 +52,8 @@ class Part2Cards extends Component {
             .then(response => {
                 const products = response.data.products;
                 this.setState({ products: response.data.products });
+            }).catch((err) => {
+                console.log("error in shopAPI call : " + err);
             });
         axios.get('https://tracified-react-api.herokuapp.com/shopify/shop-api/orders')
             .then(response => {
@@ -204,7 +206,11 @@ class Part2Cards extends Component {
                     });
                 });
      
-                const customer = order.customer.first_name + " " + order.customer.last_name;
+                let customer = "customer";
+                if(order.customer && (order.customer.first_name || order.customer.last_name)) {
+                    customer = order.customer.first_name + " " + order.customer.last_name;
+                }
+                
      
                
      
