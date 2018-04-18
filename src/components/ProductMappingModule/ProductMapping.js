@@ -141,7 +141,7 @@ class ProductMapping extends Component {
         }
 
       })
-      (function (error) {
+      .catch(function (error) {
         console.log(error);
       });
 
