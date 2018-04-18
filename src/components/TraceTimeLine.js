@@ -27,6 +27,7 @@ class TraceTimeLine extends Component {
             timeline: "",
             istimelineLoading: true,
             errorArray: [],
+            filteredTimeline: [],
             isError: false,
         };
     }
@@ -70,6 +71,10 @@ class TraceTimeLine extends Component {
                 timeline: timeline,
                 istimelineLoading: false,
                 array: arr
+            }, () => {
+                this.setState({
+                    filteredTimeline: this.state.timeline.items.filter(stage => !isEmpty(stage.data))
+                });
             });
         }).catch((error) => {
 
@@ -109,6 +114,7 @@ class TraceTimeLine extends Component {
 
     render() {
 
+        
 
         let timelineTopStyle = {
             backgroundColor: 'rgba(0,0,0,0.8)',
@@ -144,11 +150,12 @@ class TraceTimeLine extends Component {
                     </div>
                     <div style={{ paddingLeft: 30 }}>
                         <Timeline>
-                            {this.state.timeline.items.map((stage, index) => {
+                            {
+                                this.state.filteredTimeline.map((stage, index) => {
 
-                                // if(isEmpty(stage.data)) {
-                                //     console.log("stage is empty");
-                                //     return;
+                                if(isEmpty(stage.data)) {
+                                    console.log("stage is empty");
+                                }
                                 // } else {
                                     let titleText = (index + 1) + ". " + stage.title;
                                 let descriptionText = stage.description;
