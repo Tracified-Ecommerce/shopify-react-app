@@ -10,46 +10,47 @@ class TimelineContent extends Component {
 
     constructor(props) {
         super(props);
-        this.height = 0;
-        this.onClick = this.props.onClick;
-        this.state = {
-            collapseArray: this.props.collapseArray,
-            isCollsapsible: false
-        };
+        // this.height = 0;
+        // this.onClick = this.props.onClick;
+        // this.state = {
+        //     collapseArray: this.props.collapseArray,
+        //     isCollsapsible: false
+        // };
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({ collapseArray: props.collapseArray });
-    }
+    // componentWillReceiveProps(props) {
+    //     this.setState({ collapseArray: props.collapseArray });
+    // }
 
-    componentDidMount() {
-        this.height = document.getElementById(this.props.componentID).clientHeight + 15;
-        if (this.height > 112) {
-            this.setState({ isCollsapsible: true });
-        }
-    }
+    // componentDidMount() {
+    //     this.height = document.getElementById(this.props.componentID).clientHeight + 15;
+    //     if (this.height > 112) {
+    //         this.setState({ isCollsapsible: true });
+    //     }
+    // }
 
     render() {
 
         var stageData = this.props.data;
-        var isClosed = this.props.collapseArray[this.props.collapseArrayKey];
-        var buttonText = this.props.collapseArray[this.props.collapseArrayKey] ? { text: "see less \u25B2" } : { text: "see more  \u25BC" };
-        var divStyle = this.state.isCollsapsible ? (!this.state.collapseArray[this.props.collapseArrayKey] ? { overflow: "hidden", height: 120, transition: 'all 0.7s ease-in-out' } : { overflow: "hidden", height: this.height, transition: 'all 0.7s ease-in-out' }) : {};
-        var buttonCode = <p></p>;
-        var seeMoreStyle = !this.props.collapseArray[this.props.collapseArrayKey] ? { background: 'linear-gradient(rgba(255,255,255,1), white)', position: 'relative', bottom: '0px', boxShadow: '0px -8px 10px -1px rgba(255,255,255,1)' } : {};
+        // var isClosed = this.props.collapseArray[this.props.collapseArrayKey];
+        // var buttonText = this.props.collapseArray[this.props.collapseArrayKey] ? { text: "see less \u25B2" } : { text: "see more  \u25BC" };
+        // var divStyle = this.state.isCollsapsible ? (!this.state.collapseArray[this.props.collapseArrayKey] ? { overflow: "hidden", height: 120, transition: 'all 0.7s ease-in-out' } : { overflow: "hidden", height: this.height, transition: 'all 0.7s ease-in-out' }) : {};
+        // var buttonCode = <p></p>;
+        // var seeMoreStyle = !this.props.collapseArray[this.props.collapseArrayKey] ? { background: 'linear-gradient(rgba(255,255,255,1), white)', position: 'relative', bottom: '0px', boxShadow: '0px -8px 10px -1px rgba(255,255,255,1)' } : {};
 
-        if (this.state.isCollsapsible) {
-            buttonCode = <Button plain
-                onClick={(e) => { this.props.onClick(this.props.collapseArrayKey, isClosed) }}
-            >
-                {buttonText.text}
-            </Button>
-        }
+        // if (this.state.isCollsapsible) {
+        //     buttonCode = <Button plain
+        //         onClick={(e) => { this.props.onClick(this.props.collapseArrayKey, isClosed) }}
+        //     >
+        //         {buttonText.text}
+        //     </Button>
+        // }
 
         return (
             <div className="timelineContentWrapper">
 
-                <div className="componentClass" style={divStyle} id={this.props.componentID} >
+                {/* <div className="componentClass" style={divStyle} id={this.props.componentID} > */}
+                <div className="componentClass" id={this.props.componentID} >
                     {
 
                         Object.keys(stageData).map(function (key) {
@@ -71,7 +72,7 @@ class TimelineContent extends Component {
                                                     return <div style={{ display: "none" }}></div>
                                                 } else {
                                                     return (
-                                                        
+
                                                         <div className="artifactValue" key={key} > <span className="artifactValueTitle">&#8227; {artifactAttribute.title} :</span> {artifactAttribute.value}</div>
                                                     )
                                                 }
@@ -116,7 +117,7 @@ class TimelineContent extends Component {
                                                                     {
                                                                         subGroup[innerKey].value.map(x => {
                                                                             flag++;
-                                                                            if(flag == 1) {
+                                                                            if (flag == 1) {
                                                                                 return <div className="keyClass"><span className="spanClass" >{subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span></div>
                                                                             } else {
                                                                                 newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
@@ -155,9 +156,9 @@ class TimelineContent extends Component {
                     }
                 </div>
 
-                <div style={seeMoreStyle}>
+                {/* <div style={seeMoreStyle}>
                     {buttonCode}
-                </div>
+                </div> */}
 
             </div>
         );

@@ -21,9 +21,9 @@ class TraceTimeLine extends Component {
 
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
         this.state = {
-            array: [],
+            // array: [],
             timeline: "",
             istimelineLoading: true,
             errorArray: [],
@@ -32,21 +32,21 @@ class TraceTimeLine extends Component {
         };
     }
 
-    handleClick = (index, isClosed) => {
+    // handleClick = (index, isClosed) => {
 
-        if (!isClosed) {
-            //reset all values in array to false -> (sets all cards' "isOpen" attributes to false)
-            this.state.array.fill(false);
+    //     if (!isClosed) {
+    //         //reset all values in array to false -> (sets all cards' "isOpen" attributes to false)
+    //         this.state.array.fill(false);
 
-        }
+    //     }
 
-        //set only this card's collapse attribute to true
-        var temp = this.state.array.slice();
-        temp[index] = !(temp[index]);
-        // replace array with modified temp array
-        this.setState({ array: temp });
+    //     //set only this card's collapse attribute to true
+    //     var temp = this.state.array.slice();
+    //     temp[index] = !(temp[index]);
+    //     // replace array with modified temp array
+    //     this.setState({ array: temp });
 
-    }
+    // }
 
     componentDidMount() {
         axios({
@@ -60,17 +60,17 @@ class TraceTimeLine extends Component {
             const responseData = response.data;
             let timeline = responseData.tabs[2];
             let itms = timeline.items;
-            let arr = [];
+            // let arr = [];
 
-            itms.map((e, i) => {
-                arr.push(false);
-                return true;
-            });
+            // itms.map((e, i) => {
+            //     arr.push(false);
+            //     return true;
+            // });
 
             this.setState({
                 timeline: timeline,
                 istimelineLoading: false,
-                array: arr
+                // array: arr
             }, () => {
                 this.setState({
                     filteredTimeline: this.state.timeline.items.filter(stage => !isEmpty(stage.data))
@@ -181,11 +181,11 @@ class TraceTimeLine extends Component {
 
                                         <div id={index}>
                                             <TimelineContent
-                                                collapseArray={this.state.array}
-                                                collapseArrayKey={index}
+                                                // collapseArray={this.state.array}
+                                                // collapseArrayKey={index}
                                                 data={stageData}
                                                 componentID={"component" + index}
-                                                onClick={this.handleClick}
+                                                // onClick={this.handleClick}
                                             />
                                         </div>
                                     </TimelineEvent>
