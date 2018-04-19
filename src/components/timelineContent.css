@@ -1,7 +1,6 @@
-/* Media queries for the mobile devices */
 .compSpanClass{
     font-weight: bold;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .compClass{
@@ -11,12 +10,12 @@
 
 .artifactValue{
     height: 24px;
-    padding-left: 14px;
+    padding-left: 9px;
 }
 
 .artifactValueTitle{
     font-weight: bold;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .GroupWrapperClass{

@@ -62,7 +62,12 @@ class TimelineContent extends Component {
 
                                 if (isObject(subGroup.value)) {
 
-                                    return <div>
+                                    return <div className="GroupWrapperClass" key={key} >
+                                                <div style={{ minHeight: 24 }}>
+                                                    <span style={{ fontWeight: 'bold', fontSize: 14, color: 'green' }}>
+                                                        &#8227; {subGroup.title} :
+                                                    </span>
+                                                </div>
                                         {
                                             Object.keys(subGroup.value).map((attributeKey) => {
                                                 const artifactAttribute = subGroup.value[attributeKey];
@@ -101,7 +106,7 @@ class TimelineContent extends Component {
                                                 &#8227; {stageData[key].title} :
                                     </span>
                                         </div>
-                                        <Row>
+                                        {/* <Row> */}
                                             {
                                                 Object.keys(subGroup).map((innerKey) => {
 
@@ -113,28 +118,32 @@ class TimelineContent extends Component {
                                                             console.log("FOUND ARRAY");
                                                             let flag = 0;
                                                             return (
-                                                                <Col key={innerKey} xs='12' sm='6'>
+                                                                // <Col key={innerKey} xs='12' sm='6'>
+                                                                <div key={innerKey}>
                                                                     {
                                                                         subGroup[innerKey].value.map(x => {
                                                                             flag++;
                                                                             if (flag == 1) {
-                                                                                return <div className="keyClass"><span className="spanClass" >{subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span></div>
+                                                                                return <div className="compClass"><span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span></div>
                                                                             } else {
                                                                                 newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                return <div className="keyClass"><span className="spanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span></div>
+                                                                                return <div className="compClass"><span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span></div>
                                                                             }
                                                                         })
                                                                     }
-                                                                </Col>
+                                                                {/* </Col> */}
+                                                                </div>
                                                             )
                                                             // return (
 
                                                             // )
                                                         } else {
                                                             return (
-                                                                <Col key={innerKey} xs='12' sm='6'>
-                                                                    <div className="keyClass"><span className="spanClass" >{subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span></div>
-                                                                </Col>
+                                                                // <Col key={innerKey} xs='12' sm='6'>
+                                                                <div key={innerKey}>
+                                                                    <div className="compClass"><span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span></div>
+                                                                </div>
+                                                                // </Col>
                                                             )
                                                         }
 
@@ -145,7 +154,7 @@ class TimelineContent extends Component {
 
                                                 })
                                             }
-                                        </Row>
+                                        {/* </Row> */}
 
                                     </div>
                                 );
