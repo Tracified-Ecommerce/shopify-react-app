@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CollapseMain from './CollapseMain';
+// import CollapseMain from './CollapseMain';
 import Uncollapsed from './Uncollapsed';
 import * as axios from 'axios';
 import { Container, Row, Col} from 'reactstrap';
@@ -346,18 +346,6 @@ class Part2Cards extends Component {
                                 
                                 />
                             );
-                        }else{
-                            return (
-                                <CollapseMain 
-                                    order={order} 
-                                    productsProp={this.state.products} 
-                                    qrVal={qrValue} 
-                                    title={title}
-                                    collapseArray={this.state.cardStateArray}
-                                    collapseArrayKey={index}
-                                    onClick={this.handleClick}
-                                />
-                            );          
                         }
                         
                     })}
