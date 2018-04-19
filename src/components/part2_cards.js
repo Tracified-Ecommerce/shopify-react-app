@@ -13,7 +13,7 @@ class Part2Cards extends Component {
     constructor() {
         super();
         this.handleClick = this.handleClick.bind(this);
-        this.toggleCardType = this.toggleCardType.bind(this);
+        // this.toggleCardType = this.toggleCardType.bind(this);
         this.state = {
             orders: [],
             cardStateArray: [],
@@ -43,9 +43,9 @@ class Part2Cards extends Component {
     
     }
 
-    toggleCardType() {
-        this.setState({ isExpanded: !this.state.isExpanded });  
-    }
+    // toggleCardType() {
+    //     this.setState({ isExpanded: !this.state.isExpanded });  
+    // }
 
     componentDidMount() {
         axios.get('https://tracified-react-api.herokuapp.com/shopify/shop-api/products')
@@ -110,7 +110,7 @@ class Part2Cards extends Component {
 
     render() {
 
-        let buttonText = this.state.isExpanded ? {text:"Switch to collapsed view"} : {text:"Switch to expanded view"}
+        // let buttonText = this.state.isExpanded ? {text:"Switch to collapsed view"} : {text:"Switch to expanded view"}
 
         if(this.state.isOrderListLoading){
             return <Loading/> ;
@@ -281,7 +281,7 @@ class Part2Cards extends Component {
 
                     <div style={{paddingBottom:10}}>
                     <Stack.Item>
-                            <Button 
+                            {/* <Button 
                                 plain
                                 size="slim" 
                                 outline  
@@ -289,7 +289,7 @@ class Part2Cards extends Component {
                                 style={{ marginBottom: '1rem' }}
                             >
                                 {buttonText.text}
-                            </Button>
+                            </Button> */}
                         </Stack.Item>
                     </div>
                       
