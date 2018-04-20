@@ -62,28 +62,36 @@ class TimelineContent extends Component {
 
                                 if (isObject(subGroup.value)) {
 
-                                    return <div className="GroupWrapperClass" key={key} >
-                                                <div style={{ minHeight: 24 }}>
-                                                    <span style={{ fontWeight: 'bold', fontSize: 14, color: 'green' }}>
-                                                        &#8227; {subGroup.title} :
+                                    return
+                                    <div className="GroupWrapperClass" key={key} >
+                                        <div >
+                                            <span style={{ fontWeight: 'bold', fontSize: 14, color: 'green' }}>
+                                                &#8227; {subGroup.title} :
                                                     </span>
-                                                </div>
-                                        {
-                                            Object.keys(subGroup.value).map((attributeKey) => {
-                                                const artifactAttribute = subGroup.value[attributeKey];
-                                                console.log("artifact attribute - " + JSON.stringify(artifactAttribute));
+                                        </div>
+                                        <ul className="timelineList">
+                                            {
+                                                Object.keys(subGroup.value).map((attributeKey) => {
+                                                    const artifactAttribute = subGroup.value[attributeKey];
+                                                    console.log("artifact attribute - " + JSON.stringify(artifactAttribute));
 
-                                                if (isNull(artifactAttribute.value)) {
-                                                    return <div style={{ display: "none" }}></div>
-                                                } else {
-                                                    return (
+                                                    if (isNull(artifactAttribute.value)) {
+                                                        return <div style={{ display: "none" }}></div>
+                                                    } else {
+                                                        return (
+                                                            <li className="timelineListItem">
+                                                                <div className="artifactValue" key={key} >
+                                                                    <span className="artifactValueTitle">&#8227; {artifactAttribute.title} :</span> {artifactAttribute.value}
+                                                                </div>
+                                                            </li>
 
-                                                        <div className="artifactValue" key={key} > <span className="artifactValueTitle">&#8227; {artifactAttribute.title} :</span> {artifactAttribute.value}</div>
-                                                    )
-                                                }
+                                                        )
+                                                    }
 
-                                            })
-                                        }
+                                                })
+                                            }
+                                        </ul>
+
                                     </div>;
 
                                 } else {
@@ -92,7 +100,9 @@ class TimelineContent extends Component {
                                         return <div style={{ display: "none" }}></div>
                                     } else {
                                         return (
-                                            <div className="compClass" key={key} > <span className="compSpanClass" >&#8227; {subGroup.title} :</span> {subGroup.value}</div>
+                                            <div className="compClass" key={key} >
+                                                <span className="compSpanClass" >&#8227; {subGroup.title} :</span><span className="innerSpanClass">{subGroup.value}</span>
+                                            </div>
                                         )
                                     }
 
@@ -101,12 +111,13 @@ class TimelineContent extends Component {
 
                                 return (
                                     <div className="GroupWrapperClass" key={key} >
-                                        <div style={{ minHeight: 24 }}>
+                                        <div >
                                             <span style={{ fontWeight: 'bold', fontSize: 14, color: 'green' }}>
                                                 &#8227; {stageData[key].title} :
                                     </span>
                                         </div>
-                                        {/* <Row> */}
+                                        <ul className="timelineList">
+                                            {/* <Row> */}
                                             {
                                                 Object.keys(subGroup).map((innerKey) => {
 
@@ -124,14 +135,26 @@ class TimelineContent extends Component {
                                                                         subGroup[innerKey].value.map(x => {
                                                                             flag++;
                                                                             if (flag == 1) {
-                                                                                return <div className="compClass"><span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span></div>
+                                                                                return
+                                                                                <li className="timelineListItem">
+                                                                                    <div className="compClass">
+                                                                                        <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span>
+                                                                                    </div>
+                                                                                </li>
+
                                                                             } else {
                                                                                 newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                return <div className="compClass"><span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span></div>
+                                                                                return
+                                                                                <li className="timelineListItem">
+                                                                                    <div className="compClass">
+                                                                                        <span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span>
+                                                                                    </div>
+                                                                                </li>
+
                                                                             }
                                                                         })
                                                                     }
-                                                                {/* </Col> */}
+                                                                    {/* </Col> */}
                                                                 </div>
                                                             )
                                                             // return (
@@ -140,9 +163,13 @@ class TimelineContent extends Component {
                                                         } else {
                                                             return (
                                                                 // <Col key={innerKey} xs='12' sm='6'>
-                                                                <div key={innerKey}>
-                                                                    <div className="compClass"><span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span></div>
-                                                                </div>
+                                                                <li className="timelineListItem">
+                                                                    <div key={innerKey}>
+                                                                        <div className="compClass">
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
                                                                 // </Col>
                                                             )
                                                         }
@@ -154,7 +181,8 @@ class TimelineContent extends Component {
 
                                                 })
                                             }
-                                        {/* </Row> */}
+                                            {/* </Row> */}
+                                        </ul>
 
                                     </div>
                                 );

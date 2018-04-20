@@ -1,15 +1,23 @@
 .compSpanClass{
     font-weight: bold;
+    /* display: table-cell; */
     /* font-size: 14px; */
 }
 
+.innerSpanClass{
+    
+    /* display: table-cell; */
+}
+
 .compClass{
-    height: 24px;
+    /* height: 24px; */
+    /* display: table-row; */
     padding-left: 14px;
 }
 
 .artifactValue{
-    height: 24px;
+    /* height: 24px; */
+    /* padding-left: 14px; */
     padding-left: 9px;
 }
 
@@ -28,10 +36,21 @@
 }
 
 .keyClass{
-    height: 24px;
+    /* height: 24px; */
 }
 
 .spanClass{
     font-weight: bold;
     padding-left: 3em;
+}
+
+.timelineListItem{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.timelineList{
+    padding: 0;
 }
