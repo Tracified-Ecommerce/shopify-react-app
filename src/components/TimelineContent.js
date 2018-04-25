@@ -66,7 +66,7 @@ class TimelineContent extends Component {
                                         <div className="GroupWrapperClass" key={key + key} >
                                             <div >
                                                 <span style={{ fontWeight: 'bold', fontSize: 14, color: 'green' }}>
-                                                    &#8227; {subGroup.title} :
+                                                    &#8227; {subGroup.title} : 
                                                     </span>
                                             </div>
                                             <ul className="timelineList">
@@ -101,7 +101,8 @@ class TimelineContent extends Component {
                                     } else {
                                         return (
                                             <div className="compClass" key={key} >
-                                                <span className="compSpanClass" >&#8227; {subGroup.title} :</span><span className="innerSpanClass">{subGroup.value}</span>
+                                            
+                                                <span className="compSpanClass" >&#8227; {subGroup.title} : </span><span className="innerSpanClass">{subGroup.value}</span>
                                             </div>
                                         )
                                     }
@@ -129,39 +130,78 @@ class TimelineContent extends Component {
                                                             console.log("FOUND ARRAY");
                                                             let flag = 0;
                                                             return (
-                                                                // <Col key={innerKey} xs='12' sm='6'>
                                                                 <div key={innerKey}>
                                                                     {
                                                                         subGroup[innerKey].value.map(x => {
                                                                             flag++;
-                                                                            if (flag == 1) {
-                                                                                return (
-                                                                                <li className="timelineListItem">
-                                                                                    <div className="compClass">
-                                                                                        <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span>
-                                                                                    </div>
-                                                                                </li> )
+                                                                            if (flag == 1) {                                                                                
+                                                                                console.log("section 1 !!!!!!!!!!!!!!!!!!!!!!!");
+
+                                                                                if (isNull(subGroup[innerKey].title)) {
+                                                                                    console.log("handled no title #######################");
+                                                                                    return (
+                                                                                        <li className="timelineListItem">
+                                                                                            <div key={innerKey}>
+                                                                                                <div className="compClass">
+                                                                                                    <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    )
+                                                                                } else {
+                                                                                    return (
+                                                                                        <li className="timelineListItem">
+                                                                                            <div key={innerKey}>
+                                                                                                <div className="compClass">
+                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    )
+                                                                                }   
 
                                                                             } else {
+                                                                                console.log("section 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                                                                 newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                return (
-                                                                                <li className="timelineListItem">
-                                                                                    <div className="compClass">
-                                                                                        <span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span>
-                                                                                    </div>
-                                                                                </li> 
-                                                                                )}
+                                                                                if (isNull(subGroup[innerKey].title)) {
+                                                                                    console.log("handled no title #######################");
+                                                                                    return (
+                                                                                        <li className="timelineListItem">
+                                                                                            <div key={innerKey}>
+                                                                                                <div className="compClass">
+                                                                                                    <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    )
+                                                                                } else {
+                                                                                    return (
+                                                                                        <li className="timelineListItem">
+                                                                                            <div key={innerKey}>
+                                                                                                <div className="compClass">
+                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    )
+                                                                                }}
                                                                         })
                                                                     }
-                                                                    {/* </Col> */}
                                                                 </div>
                                                             )
-                                                            // return (
-
-                                                            // )
+                                                        } else  if (isNull(subGroup[innerKey].title)) {
+                                                            console.log("handled no title #######################");
+                                                            return (
+                                                                <li className="timelineListItem">
+                                                                    <div key={innerKey}>
+                                                                        <div className="compClass">
+                                                                            <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            )
                                                         } else {
                                                             return (
-                                                                // <Col key={innerKey} xs='12' sm='6'>
                                                                 <li className="timelineListItem">
                                                                     <div key={innerKey}>
                                                                         <div className="compClass">
@@ -169,12 +209,11 @@ class TimelineContent extends Component {
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                // </Col>
                                                             )
                                                         }
-
-                                                    } else {
+                                                
                                                         console.log("found a non object subGroup[innerKey] : " + subGroup[innerKey]);
+                                                        
                                                     }
                                                     return null;
 
