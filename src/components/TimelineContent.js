@@ -144,14 +144,13 @@ class TimelineContent extends Component {
 
                                                                             } else {
                                                                                 newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                return 
+                                                                                return (
                                                                                 <li className="timelineListItem">
                                                                                     <div className="compClass">
                                                                                         <span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span>
                                                                                     </div>
                                                                                 </li> 
-
-                                                                            }
+                                                                                )}
                                                                         })
                                                                     }
                                                                     {/* </Col> */}

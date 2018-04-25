@@ -12,11 +12,11 @@ const QRCode = require('qrcode.react');
 class Part2Cards extends Component {
     constructor() {
         super();
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
         // this.toggleCardType = this.toggleCardType.bind(this);
         this.state = {
             orders: [],
-            cardStateArray: [],
+            // cardStateArray: [],
             products: {},
             isOrderListLoading: true,
             search: '',
@@ -27,21 +27,21 @@ class Part2Cards extends Component {
         };
     }
 
-    handleClick = (index, isClosed) => {
+    // handleClick = (index, isClosed) => {
   
-        if(!isClosed){
-        //reset all values in array to false -> (sets all cards' "isOpen" attributes to false)
-        this.state.cardStateArray.fill(false);
+    //     if(!isClosed){
+    //     //reset all values in array to false -> (sets all cards' "isOpen" attributes to false)
+    //     this.state.cardStateArray.fill(false);
 
-        }
+    //     }
 
-        //set only this card's collapse attribute to true
-        var temp = this.state.cardStateArray.slice();
-        temp[index] = !(temp[index]);
-        // replace array with modified temp array
-        this.setState({cardStateArray: temp});
+    //     //set only this card's collapse attribute to true
+    //     var temp = this.state.cardStateArray.slice();
+    //     temp[index] = !(temp[index]);
+    //     // replace array with modified temp array
+    //     this.setState({cardStateArray: temp});
     
-    }
+    // }
 
     // toggleCardType() {
     //     this.setState({ isExpanded: !this.state.isExpanded });  
