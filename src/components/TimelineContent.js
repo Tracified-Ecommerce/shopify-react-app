@@ -10,41 +10,12 @@ class TimelineContent extends Component {
 
     constructor(props) {
         super(props);
-        // this.height = 0;
-        // this.onClick = this.props.onClick;
-        // this.state = {
-        //     collapseArray: this.props.collapseArray,
-        //     isCollsapsible: false
-        // };
     }
-
-    // componentWillReceiveProps(props) {
-    //     this.setState({ collapseArray: props.collapseArray });
-    // }
-
-    // componentDidMount() {
-    //     this.height = document.getElementById(this.props.componentID).clientHeight + 15;
-    //     if (this.height > 112) {
-    //         this.setState({ isCollsapsible: true });
-    //     }
-    // }
 
     render() {
 
         var stageData = this.props.data;
-        // var isClosed = this.props.collapseArray[this.props.collapseArrayKey];
-        // var buttonText = this.props.collapseArray[this.props.collapseArrayKey] ? { text: "see less \u25B2" } : { text: "see more  \u25BC" };
-        // var divStyle = this.state.isCollsapsible ? (!this.state.collapseArray[this.props.collapseArrayKey] ? { overflow: "hidden", height: 120, transition: 'all 0.7s ease-in-out' } : { overflow: "hidden", height: this.height, transition: 'all 0.7s ease-in-out' }) : {};
-        // var buttonCode = <p></p>;
-        // var seeMoreStyle = !this.props.collapseArray[this.props.collapseArrayKey] ? { background: 'linear-gradient(rgba(255,255,255,1), white)', position: 'relative', bottom: '0px', boxShadow: '0px -8px 10px -1px rgba(255,255,255,1)' } : {};
-
-        // if (this.state.isCollsapsible) {
-        //     buttonCode = <Button plain
-        //         onClick={(e) => { this.props.onClick(this.props.collapseArrayKey, isClosed) }}
-        //     >
-        //         {buttonText.text}
-        //     </Button>
-        // }
+        
 
         return (
             <div className="timelineContentWrapper">
@@ -153,8 +124,8 @@ class TimelineContent extends Component {
                                                                                         <li className="timelineListItem">
                                                                                             <div key={innerKey}>
                                                                                                 <div className="compClass">
-                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}
-                                                                                                    </span>
+                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                    
                                                                                                 </div>
                                                                                             </div>
                                                                                         </li>
@@ -163,30 +134,8 @@ class TimelineContent extends Component {
 
                                                                             } else {
                                                                                 console.log("section 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                                                                newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                if (isNull(subGroup[innerKey].title)) {
-                                                                                    console.log("handled no title #######################");
-                                                                                    return (
-                                                                                        <li className="timelineListItem">
-                                                                                            <div key={innerKey}>
-                                                                                                <div className="compClass">
-                                                                                                    <span className="innerSpanClass">{subGroup[innerKey].value}</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                    )
-                                                                                } else {
-                                                                                    return (
-                                                                                        <li className="timelineListItem">
-                                                                                            <div key={innerKey}>
-                                                                                                <div className="compClass">
-                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> :<span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </li>
-                                                                                    )
-                                                                                }}
-                                                                        })
+                                                                                newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");                                                                                
+                                                                         } })
                                                                     }
                                                                 </div>
                                                             )
@@ -206,7 +155,7 @@ class TimelineContent extends Component {
                                                                 <li className="timelineListItem">
                                                                     <div key={innerKey}>
                                                                         <div className="compClass">
-                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> :<span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}</span>                                                                      
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
