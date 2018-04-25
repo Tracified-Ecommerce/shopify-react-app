@@ -153,7 +153,8 @@ class TimelineContent extends Component {
                                                                                         <li className="timelineListItem">
                                                                                             <div key={innerKey}>
                                                                                                 <div className="compClass">
-                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}
+                                                                                                    </span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </li>
@@ -179,7 +180,7 @@ class TimelineContent extends Component {
                                                                                         <li className="timelineListItem">
                                                                                             <div key={innerKey}>
                                                                                                 <div className="compClass">
-                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                                                    <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> :<span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}</span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </li>
@@ -205,7 +206,7 @@ class TimelineContent extends Component {
                                                                 <li className="timelineListItem">
                                                                     <div key={innerKey}>
                                                                         <div className="compClass">
-                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{subGroup[innerKey].value}</span>
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> :<span className="innerSpanClass">{subGroup[innerKey].value[0]},{subGroup[innerKey].value[1]},{subGroup[innerKey].value[2]},{subGroup[innerKey].value[3]}</span>                                                                      
                                                                         </div>
                                                                     </div>
                                                                 </li>
