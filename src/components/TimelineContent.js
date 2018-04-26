@@ -106,7 +106,7 @@ class TimelineContent extends Component {
                                                             subGroup[innerKey].value.forEach(i => {
                                                                 console.log("################# Inside for each ###############");
                                                                 console.log("values of valueTimelineStage :::: " + i);
-                                                                valueTimelineStage +=  i+" , ";
+                                                                valueTimelineStage +=  i+"  ";
                                                             })
 
                                                             return (
@@ -114,8 +114,7 @@ class TimelineContent extends Component {
 
                                                                     <li className="timelineListItem">
                                                                         <div className="compClass">
-                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{valueTimelineStage}</span>
-                                                                           
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{valueTimelineStage}</span>                                                                           
                                                                         </div>
                                                                     </li>
 
