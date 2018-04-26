@@ -98,17 +98,26 @@ class TimelineContent extends Component {
                                                         if (isNull(subGroup[innerKey].value)) {
                                                             return <div style={{ display: "none" }}></div>
                                                         } else if (isArray(subGroup[innerKey].value)) {
-                                                            console.log("FOUND ARRAY");
-                                                            let dsadsa = "";
-                                                            
+                                                            console.log("FOUND ARRAY !!!!!");
+                                                            console.log("subGroup[innerKey].value :"+subGroup[innerKey].value);
+                                                            let valueTimelineStage = "" ;
+                                                            console.log("valueTimelineStage :"+valueTimelineStage);
+
+                                                            subGroup[innerKey].value.forEach(i => {
+                                                                console.log("################# Inside for each ###############");
+                                                                console.log("values of valueTimelineStage :::: " + i);
+                                                                valueTimelineStage +=  i+" , ";
+                                                            })
+
                                                             return (
                                                                 <div key={innerKey}>
 
                                                                     <li className="timelineListItem">
                                                                         <div className="compClass">
-                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{dsadsa}</span>
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{valueTimelineStage}</span>
+                                                                           
                                                                         </div>
-                                                                    </li>)
+                                                                    </li>
 
                                                                 </div>
                                                             )
@@ -142,7 +151,6 @@ class TimelineContent extends Component {
 
                                                 })
                                             }
-                                            {/* </Row> */}
                                         </ul>
 
                                     </div>
