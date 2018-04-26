@@ -127,33 +127,17 @@ class TimelineContent extends Component {
                                                             return <div style={{ display: "none" }}></div>
                                                         } else if (isArray(subGroup[innerKey].value)) {
                                                             console.log("FOUND ARRAY");
-                                                            let flag = 0;
+                                                            let dsadsa = "";
+                                                            
                                                             return (
-                                                                // <Col key={innerKey} xs='12' sm='6'>
                                                                 <div key={innerKey}>
-                                                                    {
-                                                                        subGroup[innerKey].value.map(x => {
-                                                                            flag++;
-                                                                            if (flag == 1) {
-                                                                                return (
-                                                                                <li className="timelineListItem">
-                                                                                    <div className="compClass">
-                                                                                        <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{x}</span>
-                                                                                    </div>
-                                                                                </li> )
 
-                                                                            } else {
-                                                                                newTitle = subGroup[innerKey].title.replace(/[a-zA-z0-9]/g, "\u2007");
-                                                                                return (
-                                                                                <li className="timelineListItem">
-                                                                                    <div className="compClass">
-                                                                                        <span className="compSpanClass" >{newTitle}</span> : <span className="innerSpanClass">{x}</span>
-                                                                                    </div>
-                                                                                </li> 
-                                                                                )}
-                                                                        })
-                                                                    }
-                                                                    {/* </Col> */}
+                                                                    <li className="timelineListItem">
+                                                                        <div className="compClass">
+                                                                            <span className="compSpanClass" >&#8227; {subGroup[innerKey].title}</span> : <span className="innerSpanClass">{dsadsa}</span>
+                                                                        </div>
+                                                                    </li>)
+
                                                                 </div>
                                                             )
                                                             // return (
