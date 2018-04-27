@@ -69,10 +69,10 @@ class Part2Cards extends Component {
                     cardStateArray: arr
                 });
             }).catch((err) => {
-                this.setState({ 
-                    isError:true,
-                    isOrderListLoading:false
-                });
+                // this.setState({ 
+                //     isError:true,
+                //     isOrderListLoading:false
+                // });
             });
     }
 
