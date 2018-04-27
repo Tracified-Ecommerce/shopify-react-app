@@ -5,6 +5,7 @@ import * as axios from 'axios';
 import { Container, Row, Col} from 'reactstrap';
 import { Thumbnail, Card, Page, List, Badge, Button, Stack, RadioButton, TextContainer } from '@shopify/polaris';
 import Loading from './Loading';
+import Pagination from './pagination';
 // import ErrorMsg from './errorMsg';
 
 const QRCode = require('qrcode.react');
@@ -16,6 +17,7 @@ class Part2Cards extends Component {
         // this.toggleCardType = this.toggleCardType.bind(this);
         this.state = {
             orders: [],
+            orderProducts: [] ,
             // cardStateArray: [],
             products: {},
             isOrderListLoading: true,
@@ -24,7 +26,16 @@ class Part2Cards extends Component {
             isCheckedCus:false,
             isCheckedOrd:true,
             isError:false,
+            pageOfItems: []
         };
+
+        
+        this.onChangePage = this.onChangePage.bind(this);
+    }
+
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
     }
 
     // handleClick = (index, isClosed) => {
@@ -121,18 +132,13 @@ class Part2Cards extends Component {
         
         else{
         // All the order details
-
-        
        // var orders = this.state.orders;
-       
-       
-
        console.log(this.state.isCheckedCus);
        console.log(this.state.isCheckedOrd);
     
     
        if(this.state.isCheckedCus){
-           console.log("cus works");
+           console.log("if conditon work");
 
        let orders = this.state.orders.filter(
            (order) => {
@@ -161,8 +167,6 @@ class Part2Cards extends Component {
 
           const customer = order.customer.first_name + " " + order.customer.last_name;
 
-         
-
           orderArray.push({
               id: order.id,
               order_number: order.order_number,
@@ -171,16 +175,13 @@ class Part2Cards extends Component {
               created_at: order.created_at.substring(0, 10)
           });
       });
-      
-    
-           
         
         console.log(orderArray);
    
        }
 
        else if(this.state.isCheckedOrd){
-           console.log("ord works");
+           console.log("else if works");
 
 
            let orders = this.state.orders.filter(
@@ -188,8 +189,6 @@ class Part2Cards extends Component {
                    return order.name.indexOf(this.state.search) !== -1 ;
                }
             );
-            console.log(orders);
-
             console.log(orders);
 
             var orderArray = [];
@@ -223,15 +222,14 @@ class Part2Cards extends Component {
                 });
             });
             
-            console.log(orderArray);
+            // console.log(orderArray);
 
              
        }
 
     else{
       var orders = this.state.orders;
-     
-
+      console.log("else works");
       console.log(orders);
 
       var orderArray = [];
@@ -250,8 +248,6 @@ class Part2Cards extends Component {
 
           const customer = order.customer.first_name + " " + order.customer.last_name;
 
-         
-
           orderArray.push({
               id: order.id,
               order_number: order.order_number,
@@ -260,8 +256,6 @@ class Part2Cards extends Component {
               created_at: order.created_at.substring(0, 10)
           });
       });
-      
-   
     
        console.log(orderArray);
    }
@@ -332,6 +326,14 @@ class Part2Cards extends Component {
 
                     </Stack>
                     </div>
+                
+                    <div className="text-center">
+                        {this.state.pageOfItems.map(item =>
+                            <div key={item.id}>{item.line_items[0].title}</div>
+                        )}
+                        <Pagination pageitems={this.state.orders} onChangePage={this.onChangePage} />
+                    </div>
+
                     {orderArray.map((order, index) => {
                         const qrValue = order.order_number.toString();
                         const title = "Order ID: " + order.order_number;
