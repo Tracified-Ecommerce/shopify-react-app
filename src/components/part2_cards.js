@@ -5,7 +5,6 @@ import * as axios from 'axios';
 import { Container, Row, Col} from 'reactstrap';
 import { Thumbnail, Card, Page, List, Badge, Button, Stack, RadioButton, TextContainer } from '@shopify/polaris';
 import Loading from './Loading';
-import Pagination from './pagination';
 // import ErrorMsg from './errorMsg';
 
 const QRCode = require('qrcode.react');
@@ -17,7 +16,6 @@ class Part2Cards extends Component {
         // this.toggleCardType = this.toggleCardType.bind(this);
         this.state = {
             orders: [],
-            orderProducts: [] ,
             // cardStateArray: [],
             products: {},
             isOrderListLoading: true,
@@ -26,16 +24,10 @@ class Part2Cards extends Component {
             isCheckedCus:false,
             isCheckedOrd:true,
             isError:false,
-            pageOfItems: []
         };
 
-        
-        this.onChangePage = this.onChangePage.bind(this);
-    }
-
-    onChangePage(pageOfItems) {
-        // update state with new page of items
-        this.setState({ pageOfItems: pageOfItems });
+        this.orderArray = [];
+        this.paginatedArray = [];
     }
 
     // handleClick = (index, isClosed) => {
@@ -80,10 +72,10 @@ class Part2Cards extends Component {
                     cardStateArray: arr
                 });
             }).catch((err) => {
-                this.setState({ 
-                    isError:true,
-                    isOrderListLoading:false
-                });
+                // this.setState({ 
+                //     isError:true,
+                //     isOrderListLoading:false
+                // });
             });
     }
 
@@ -119,6 +111,12 @@ class Part2Cards extends Component {
         });
     } 
 
+    paginateArray(pageNumber, itemsPerPage, array) {
+      return array.filter(function(item, i) {
+        return i >= itemsPerPage*(pageNumber-1) && i < pageNumber*itemsPerPage;
+      });
+    }
+
     render() {
 
         // let buttonText = this.state.isExpanded ? {text:"Switch to collapsed view"} : {text:"Switch to expanded view"}
@@ -132,13 +130,18 @@ class Part2Cards extends Component {
         
         else{
         // All the order details
+
+        
        // var orders = this.state.orders;
+       
+       
+
        console.log(this.state.isCheckedCus);
        console.log(this.state.isCheckedOrd);
     
     
        if(this.state.isCheckedCus){
-           console.log("if conditon work");
+           console.log("cus works");
 
        let orders = this.state.orders.filter(
            (order) => {
@@ -151,7 +154,7 @@ class Part2Cards extends Component {
        );
                console.log(orders);
 
-      var orderArray = [];
+      this.orderArray = [];
       orders.forEach((order) => {
           var items = order.line_items;
           var lineItems = [];
@@ -167,7 +170,9 @@ class Part2Cards extends Component {
 
           const customer = order.customer.first_name + " " + order.customer.last_name;
 
-          orderArray.push({
+         
+
+          this.orderArray.push({
               id: order.id,
               order_number: order.order_number,
               lineItems: lineItems,
@@ -175,13 +180,16 @@ class Part2Cards extends Component {
               created_at: order.created_at.substring(0, 10)
           });
       });
-        
-        console.log(orderArray);
+      
+    
+           
+      this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+        console.log(this.orderArray);
    
        }
 
        else if(this.state.isCheckedOrd){
-           console.log("else if works");
+           console.log("ord works");
 
 
            let orders = this.state.orders.filter(
@@ -191,7 +199,9 @@ class Part2Cards extends Component {
             );
             console.log(orders);
 
-            var orderArray = [];
+            console.log(orders);
+
+            this.orderArray = [];
             orders.forEach((order) => {
                 var items = order.line_items;
                 var lineItems = [];
@@ -213,7 +223,7 @@ class Part2Cards extends Component {
      
                
      
-                orderArray.push({
+                this.orderArray.push({
                     id: order.id,
                     order_number: order.order_number,
                     lineItems: lineItems,
@@ -222,17 +232,19 @@ class Part2Cards extends Component {
                 });
             });
             
-            // console.log(orderArray);
+            this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+            console.log(this.orderArray);
 
              
        }
 
     else{
       var orders = this.state.orders;
-      console.log("else works");
+     
+
       console.log(orders);
 
-      var orderArray = [];
+      this.orderArray = [];
       orders.forEach((order) => {
           var items = order.line_items;
           var lineItems = [];
@@ -248,7 +260,9 @@ class Part2Cards extends Component {
 
           const customer = order.customer.first_name + " " + order.customer.last_name;
 
-          orderArray.push({
+         
+
+          this.orderArray.push({
               id: order.id,
               order_number: order.order_number,
               lineItems: lineItems,
@@ -256,8 +270,11 @@ class Part2Cards extends Component {
               created_at: order.created_at.substring(0, 10)
           });
       });
+      
+      this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+   
     
-       console.log(orderArray);
+       console.log(this.orderArray);
    }
 
           var inputStyle={
@@ -326,15 +343,8 @@ class Part2Cards extends Component {
 
                     </Stack>
                     </div>
-                
-                    <div className="text-center">
-                        {this.state.pageOfItems.map(item =>
-                            <div key={item.id}>{item.line_items[0].title}</div>
-                        )}
-                        <Pagination pageitems={this.state.orders} onChangePage={this.onChangePage} />
-                    </div>
-
-                    {orderArray.map((order, index) => {
+                    
+                    {this.paginatedArray.map((order, index) => {
                         const qrValue = order.order_number.toString();
                         const title = "Order ID: " + order.order_number;
 
