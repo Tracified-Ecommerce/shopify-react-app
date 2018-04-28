@@ -13,10 +13,13 @@ class Part2Cards extends Component {
     constructor() {
         super();
         // this.handleClick = this.handleClick.bind(this);
-        // this.toggleCardType = this.toggleCardType.bind(this);
+        this.selectPage = this.selectPage.bind(this);
+        this.setItemsPerPage = this.setItemsPerPage.bind(this);
         this.state = {
             orders: [],
             // cardStateArray: [],
+            pageNo: 1,
+            itemsPerPage: 5, 
             products: {},
             isOrderListLoading: true,
             search: '',
@@ -30,25 +33,29 @@ class Part2Cards extends Component {
         this.paginatedArray = [];
     }
 
-    // handleClick = (index, isClosed) => {
-  
-    //     if(!isClosed){
-    //     //reset all values in array to false -> (sets all cards' "isOpen" attributes to false)
-    //     this.state.cardStateArray.fill(false);
+    setItemsPerPage() {
+      if(this.state.itemsPerPage == 20) {
+        this.setState({
+          itemsPerPage: 5
+        })
+      } else {
+        this.setState({
+          itemsPerPage: this.state.itemsPerPage + 5
+        })
+      }
+    }
 
-    //     }
-
-    //     //set only this card's collapse attribute to true
-    //     var temp = this.state.cardStateArray.slice();
-    //     temp[index] = !(temp[index]);
-    //     // replace array with modified temp array
-    //     this.setState({cardStateArray: temp});
-    
-    // }
-
-    // toggleCardType() {
-    //     this.setState({ isExpanded: !this.state.isExpanded });  
-    // }
+    selectPage() {
+      if(this.state.pageNo == 3) {
+        this.setState({
+          pageNo: 1
+        })
+      } else {
+        this.setState({
+          pageNo: this.state.pageNo + 1
+        })
+      }
+    }
 
     componentDidMount() {
         axios.get('https://tracified-react-api.herokuapp.com/shopify/shop-api/products')
@@ -183,9 +190,8 @@ class Part2Cards extends Component {
       
     
            
-      this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+      this.paginatedArray = this.paginateArray(this.state.pageNo, this.state.itemsPerPage, this.orderArray);
         console.log(this.orderArray);
-   
        }
 
        else if(this.state.isCheckedOrd){
@@ -232,7 +238,7 @@ class Part2Cards extends Component {
                 });
             });
             
-            this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+            this.paginatedArray = this.paginateArray(this.state.pageNo, this.state.itemsPerPage, this.orderArray);
             console.log(this.orderArray);
 
              
@@ -271,7 +277,7 @@ class Part2Cards extends Component {
           });
       });
       
-      this.paginatedArray = this.paginateArray(1 ,5,this.orderArray);
+      this.paginatedArray = this.paginateArray(this.state.pageNo, this.state.itemsPerPage, this.orderArray);
    
     
        console.log(this.orderArray);
@@ -292,15 +298,29 @@ class Part2Cards extends Component {
 
                     <div style={{paddingBottom:10}}>
                     <Stack.Item>
-                            {/* <Button 
+                            <Button 
                                 plain
                                 size="slim" 
                                 outline  
-                                onClick={this.toggleCardType} 
+                                onClick={this.selectPage} 
                                 style={{ marginBottom: '1rem' }}
                             >
-                                {buttonText.text}
-                            </Button> */}
+                                cycle pages
+                            </Button>
+                        </Stack.Item>
+                    </div>
+
+                    <div style={{paddingBottom:10}}>
+                    <Stack.Item>
+                            <Button 
+                                plain
+                                size="slim" 
+                                outline  
+                                onClick={this.setItemsPerPage} 
+                                style={{ marginBottom: '1rem' }}
+                            >
+                                items per page ++
+                            </Button>
                         </Stack.Item>
                     </div>
                       
