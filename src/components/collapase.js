@@ -34,7 +34,6 @@ class CollapaseCard extends Component {
             marginTop: '-4%',
             // position:'fixed'
         }
-        console.log("collapse products");
         let resourceThumbnails = [];
         let resourceList = this.props.itemArray.map((resItem, index) => {
             let productImage = "no/image";
