@@ -42,10 +42,10 @@ class Part2Cards extends Component {
       isCheckedOrd: true,
       isError: false,
       selected: 10,
-      totalOrders: null,
-      totalPages: null,
-      startPage: 1,
-      endPage: 2,
+      // totalOrders: null,
+      // totalPages: null,
+      // startPage: 1,
+      // endPage: 2,
       buttonDisable: false
 
     };
@@ -61,40 +61,45 @@ class Part2Cards extends Component {
 
     if (newValue == 10) {
       this.setState({
-        itemsPerPage: 10
+        itemsPerPage: 10,
+        pageNo: 1
       });
     } else if (newValue == 25) {
       this.setState({
-        itemsPerPage: 25
+        itemsPerPage: 25,
+        pageNo: 1
       });
     } else if (newValue == 50) {
       this.setState({
-        itemsPerPage: 50
+        itemsPerPage: 50,
+        pageNo: 1
       });
     } else if (newValue == 100) {
       this.setState({
-        itemsPerPage: 100
+        itemsPerPage: 100,
+        pageNo: 1
       });
     } else {
       this.setState({
-        itemsPerPage: 1000
+        itemsPerPage: 1000,
+        pageNo: 1
       });
     }
   };
 
   selectPreviousPage() {
-    this.state.totalPages = Math.ceil(this.state.totalOrders / this.state.itemsPerPage);
-    console.log(this.state.totalPages);
-    this.state.startPage = 1;
-    this.state.endPage = this.state.totalPages;
+    const totalPages = Math.ceil(this.orderArray.length / this.state.itemsPerPage);
+    console.log("total pages : " + totalPages);
+    // this.state.startPage = 1;
+    // this.state.endPage = this.state.totalPages;
 
-    if (this.state.pageNo == this.state.endPage) {
+    if (this.state.pageNo == 1) {
       this.setState({
         buttonDisable: true
       });
     } else {
       this.setState({
-        pageNo: this.state.pageNo + 1
+        pageNo: this.state.pageNo - 1
       }); 
     }
 
@@ -102,18 +107,18 @@ class Part2Cards extends Component {
   }
 
   selectNextPage() {
-    this.state.totalPages = Math.ceil(this.state.totalOrders / this.state.itemsPerPage);
-    console.log(this.state.totalPages);
-    this.state.startPage = this.state.totalPages;
-    this.state.endPage = 1;
+    const totalPages = Math.ceil(this.orderArray.length / this.state.itemsPerPage);
+    console.log("total pages : " + totalPages);
+    // this.state.startPage = totalPages;
+    // this.state.endPage = 1;
 
-    if (this.state.pageNo == this.state.endPage) {
+    if (this.state.pageNo == totalPages) {
       this.setState({
         buttonDisable: true
       });
     } else {
       this.setState({
-        pageNo: this.state.pageNo - 1
+        pageNo: this.state.pageNo + 1
       }); 
     }
   }
@@ -230,7 +235,7 @@ class Part2Cards extends Component {
             created_at: order.created_at.substring(0, 10)
           });
         });
-        this.state.totalOrders = this.orderArray.length
+        // this.state.totalOrders = this.orderArray.length
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -275,7 +280,7 @@ class Part2Cards extends Component {
             created_at: order.created_at.substring(0, 10)
           });
         });
-        this.state.totalOrders = this.orderArray.length
+        // this.state.totalOrders = this.orderArray.length
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -310,7 +315,7 @@ class Part2Cards extends Component {
           });
         });
 
-        this.state.totalOrders = this.orderArray.length
+        // this.state.totalOrders = this.orderArray.length
 
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
