@@ -26,7 +26,8 @@ class Part2Cards extends Component {
   constructor() {
     super();
     // this.handleClick = this.handleClick.bind(this);
-    this.selectPage = this.selectPage.bind(this);
+    this.selectPreviousPage = this.selectPreviousPage.bind(this);
+    this.selectNextPage = this.selectNextPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       orders: [],
@@ -40,7 +41,13 @@ class Part2Cards extends Component {
       isCheckedCus: false,
       isCheckedOrd: true,
       isError: false,
-      selected: 10
+      selected: 10,
+      totalOrders: null,
+      totalPages: null,
+      startPage: 1,
+      endPage: 2,
+      buttonDisable: false
+
     };
 
     this.orderArray = [];
@@ -75,17 +82,39 @@ class Part2Cards extends Component {
     }
   };
 
-  selectPage() {
-    if (this.state.pageNo == 6) {
+  selectPreviousPage() {
+    this.state.totalPages = Math.ceil(this.state.totalOrders / this.state.itemsPerPage);
+    console.log(this.state.totalPages);
+    this.state.startPage = 1;
+    this.state.endPage = this.state.totalPages;
+
+    if (this.state.pageNo == this.state.endPage) {
       this.setState({
-        pageNo: 1
+        buttonDisable: true
       });
-      console.log(this.state.pageNo);
     } else {
       this.setState({
         pageNo: this.state.pageNo + 1
+      }); 
+    }
+
+    
+  }
+
+  selectNextPage() {
+    this.state.totalPages = Math.ceil(this.state.totalOrders / this.state.itemsPerPage);
+    console.log(this.state.totalPages);
+    this.state.startPage = this.state.totalPages;
+    this.state.endPage = 1;
+
+    if (this.state.pageNo == this.state.endPage) {
+      this.setState({
+        buttonDisable: true
       });
-      console.log(this.state.pageNo);
+    } else {
+      this.setState({
+        pageNo: this.state.pageNo - 1
+      }); 
     }
   }
 
@@ -201,7 +230,7 @@ class Part2Cards extends Component {
             created_at: order.created_at.substring(0, 10)
           });
         });
-
+        this.state.totalOrders = this.orderArray.length
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -246,7 +275,7 @@ class Part2Cards extends Component {
             created_at: order.created_at.substring(0, 10)
           });
         });
-
+        this.state.totalOrders = this.orderArray.length
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -281,6 +310,8 @@ class Part2Cards extends Component {
           });
         });
 
+        this.state.totalOrders = this.orderArray.length
+
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -299,26 +330,7 @@ class Part2Cards extends Component {
       return (
         <Page title="Untracified Orders" separator>
           <Stack wrap={false} distribution="trailing">
-            <Stack.Item>
-              <Button
-                plain
-                size="slim"
-                outline
-                onClick={this.selectPage}
-                style={{ marginBottom: "1rem" }}
-              >
-                <Icon source="arrowLeft" color="blue" />
-              </Button>
-              <Button
-                plain
-                size="slim"
-                outline
-                onClick={this.selectPage}
-                style={{ marginBottom: "1rem" }}
-              >
-                <Icon source="arrowRight" color="blue" />
-              </Button>
-            </Stack.Item>
+            
             <Stack.Item />
               <div> Items per page</div>
             <Stack.Item >
@@ -332,6 +344,28 @@ class Part2Cards extends Component {
                 onChange={this.handleChange}
                 value={this.state.selected}
               />
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+              // disabled= {this.state.buttonDisable}
+                plain
+                size="slim"
+                outline
+                onClick={this.selectPreviousPage}
+                style={{ marginBottom: "1rem" }}
+              >
+                <Icon source="arrowLeft" color="blue" />
+              </Button>
+              <Button
+                plain
+              // disabled= {this.state.buttonDisable}
+                size="slim"
+                outline
+                onClick={this.selectNextPage}
+                style={{ marginBottom: "1rem" }}
+              >
+                <Icon source="arrowRight" color="blue" />
+              </Button>
             </Stack.Item>
           </Stack>
           <div style={{ paddingBottom: 5 }}>
