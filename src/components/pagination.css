@@ -16,6 +16,10 @@
       .pagination_stack{
         width: 118%;
       }
+
+      .pagination_stack .Polaris-Stack__Item {
+        display: flex;
+    }
  }
  
  
@@ -23,6 +27,7 @@
  @media (min-width: 650px) and (max-width: 1023px) {
     .paginationUl{
         list-style: none;
+        max-width: 64%;
     }
 
     .paginationUl li {
@@ -36,6 +41,10 @@
       }
       .pagination_stack{
         width: 118%;
+      }
+
+      .pagination_stack .Polaris-Stack__Item {
+          display: flex;
       }
  }
  
