@@ -2,6 +2,20 @@
 @media screen and (min-width: 1024px){
     .paginationUl{
         list-style: none;
+        margin-top: 6%;
+        width: 575px;
+    }
+
+    .paginationUl li:hover a:hover, .paginationUl li.active a:active {
+        background-color: #007ACE;
+       }
+
+    .paginationUl li:focus {
+        background-color: #007ACE;
+    }
+
+    .paginationUl li .active {
+        opacity: 0.7;
     }
 
     .paginationUl li {
@@ -9,12 +23,12 @@
         list-style: none;
         text-align: center;
         background-color: transparent;
-        margin-right: 30px;
-        width: 3%;
+        margin-right: 22px;
+        width: 7%;
         line-height: 150%;
       }
       .pagination_stack{
-        width: 118%;
+        width: 100%;
       }
 
       .pagination_stack .Polaris-Stack__Item {

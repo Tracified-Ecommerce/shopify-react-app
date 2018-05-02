@@ -42,22 +42,15 @@ class Part2Cards extends Component {
       isCheckedOrd: true,
       isError: false,
       selected: 10,
-      // totalOrders: null,
-      // totalPages: null,
-      // startPage: 1,
-      // endPage: 2,
-      buttonDisable: false,
-
+      buttonDisable: false
     };
 
     this.orderArray = [];
     this.paginatedArray = [];
-    this.pages;
-
+    this.totalPages;
   }
 
   handleChange = (newValue, id) => {
-
     this.setState({ selected: newValue });
 
     if (newValue == 10) {
@@ -89,10 +82,10 @@ class Part2Cards extends Component {
   };
 
   selectPreviousPage() {
-    const totalPages = Math.ceil(
+    this.totalPages = Math.ceil(
       this.orderArray.length / this.state.itemsPerPage
     );
-    console.log("total pages : " + totalPages);
+    console.log("total pages : " + this.totalPages);
     // this.state.startPage = 1;
     // this.state.endPage = this.state.totalPages;
 
@@ -105,17 +98,15 @@ class Part2Cards extends Component {
         pageNo: this.state.pageNo - 1
       });
     }
-    
   }
 
   selectNextPage() {
-    const totalPages = Math.ceil(
+    this.totalPages = Math.ceil(
       this.orderArray.length / this.state.itemsPerPage
     );
-    console.log("total pages : " + totalPages);
+    console.log("total pages : " + this.totalPages);
 
-
-    if (this.state.pageNo == totalPages) {
+    if (this.state.pageNo == this.totalPages) {
       this.setState({
         buttonDisable: true
       });
@@ -124,15 +115,13 @@ class Part2Cards extends Component {
         pageNo: this.state.pageNo + 1
       });
     }
-
   }
 
-  setPage(pageNumber){
+  setPage(pageNumber) {
     this.setState({
-      pageNo: pageNumber+1
+      pageNo: pageNumber + 1
     });
   }
-
 
   componentDidMount() {
     axios
@@ -298,12 +287,29 @@ class Part2Cards extends Component {
           this.orderArray
         );
 
-        const totalPages = Math.ceil(
+        this.totalPages = Math.ceil(
           this.orderArray.length / this.state.itemsPerPage
         );
-    
-         this.pages = Array.apply(null, {length: totalPages});
 
+        this.pages = Array.apply(null, { length: this.totalPages });
+
+        if (this.totalPages <= 10) {
+          var startPage, endPage;
+
+          startPage = 1;
+          endPage = this.totalPages;
+        } else {
+          if (this.state.pageNo <= 6) {
+            startPage = 1;
+            endPage = 10;
+          } else if (this.state.pageNo + 4 >= this.totalPages) {
+            startPage = this.totalPages - 9;
+            endPage = this.totalPages;
+          } else {
+            startPage = this.state.pageNo - 5;
+            endPage = this.state.pageNo + 4;
+          }
+        }
       } else {
         var orders = this.state.orders;
 
@@ -367,41 +373,6 @@ class Part2Cards extends Component {
                 value={this.state.selected}
               />
             </Stack.Item>
-            <div className="pagination_stack">
-            <Stack.Item >
-              <Button
-                // disabled= {this.state.buttonDisable}
-                plain
-                size="slim"
-                outline
-                onClick={this.selectPreviousPage}
-                style={{ marginBottom: "1rem" }}
-              >
-                <Icon source="arrowLeft" color="blue" />
-              </Button>
-              {/* </Stack.Item>
-              <Stack.Item> */}
-            <ul className="paginationUl" >
-            {this.pages.map((page,index) =>
-                    <li key={index} >
-                          <a onClick={() => this.setPage(index)}>{index+1}</a>
-                    </li>
-                )}
-            </ul>
-            {/* </Stack.Item>
-              <Stack.Item> */}
-              <Button
-                plain
-                // disabled= {this.state.buttonDisable}
-                size="slim"
-                outline
-                onClick={this.selectNextPage}
-                style={{ marginBottom: "1rem" }}
-              >
-                <Icon source="arrowRight" color="blue" />
-              </Button>
-            </Stack.Item>
-            </div>
           </Stack>
           <div style={{ paddingBottom: 5 }}>
             <Stack alignment="center">
@@ -459,6 +430,58 @@ class Part2Cards extends Component {
               );
             }
           })}
+          <div className="pagination_stack">
+            <Stack distribution="center">
+              <Stack.Item>
+                {/* <Button
+                  // disabled= {this.state.buttonDisable}
+                  plain
+                  size="slim"
+                  outline
+                  onClick={this.selectPreviousPage}
+                  style={{ marginBottom: "1rem" }}
+                >
+                  <Icon source="arrowLeft" color="blue" />
+                </Button> */}
+                <ul className="paginationUl">
+                  <li className={this.state.pageNo === 1 ? "disabled" : ""}>
+                    <a onClick={() => this.setPage(0)}>First</a>
+                  </li>
+                  <li className={this.state.pageNo === 1 ? "disabled" : ""}>
+                    <a onClick={() => this.selectPreviousPage()}>
+                      Previous
+                    </a>
+                  </li >
+                  {this.pages.map((page, index) => (
+                    <li key={index} >
+                      <a onClick={() => this.setPage(index)}>{index + 1}</a>
+                    </li>
+                  ))}
+                  <li className={
+                      this.state.pageNo === this.totalPages ? "disabled" : ""}>
+                    <a onClick={() => this.selectNextPage()}>
+                      Next
+                    </a>
+                  </li>
+                  <li className={
+                      this.state.pageNo === this.totalPages ? "disabled" : "" }>
+                    <a onClick={() => this.setPage(this.totalPages - 1)}>Last</a>
+                  </li>
+                </ul>
+
+                {/* <Button
+                  plain
+                  // disabled= {this.state.buttonDisable}
+                  size="slim"
+                  outline
+                  onClick={this.selectNextPage}
+                  style={{ marginBottom: "1rem" }}
+                >
+                  <Icon source="arrowRight" color="blue" />
+                </Button> */}
+              </Stack.Item>
+            </Stack>
+          </div>
         </Page>
       );
     }
