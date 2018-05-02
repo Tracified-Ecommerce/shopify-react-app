@@ -46,18 +46,19 @@ class Part2Cards extends Component {
       // totalPages: null,
       // startPage: 1,
       // endPage: 2,
-      buttonDisable: false
+      buttonDisable: false,
 
     };
 
     this.orderArray = [];
     this.paginatedArray = [];
+    this.pages;
+
   }
 
   handleChange = (newValue, id) => {
-    console.log(newValue);
+
     this.setState({ selected: newValue });
-    // console.log(this.state.selected);
 
     if (newValue == 10) {
       this.setState({
@@ -88,7 +89,9 @@ class Part2Cards extends Component {
   };
 
   selectPreviousPage() {
-    const totalPages = Math.ceil(this.orderArray.length / this.state.itemsPerPage);
+    const totalPages = Math.ceil(
+      this.orderArray.length / this.state.itemsPerPage
+    );
     console.log("total pages : " + totalPages);
     // this.state.startPage = 1;
     // this.state.endPage = this.state.totalPages;
@@ -100,17 +103,17 @@ class Part2Cards extends Component {
     } else {
       this.setState({
         pageNo: this.state.pageNo - 1
-      }); 
+      });
     }
-
     
   }
 
   selectNextPage() {
-    const totalPages = Math.ceil(this.orderArray.length / this.state.itemsPerPage);
+    const totalPages = Math.ceil(
+      this.orderArray.length / this.state.itemsPerPage
+    );
     console.log("total pages : " + totalPages);
-    // this.state.startPage = totalPages;
-    // this.state.endPage = 1;
+
 
     if (this.state.pageNo == totalPages) {
       this.setState({
@@ -119,9 +122,17 @@ class Part2Cards extends Component {
     } else {
       this.setState({
         pageNo: this.state.pageNo + 1
-      }); 
+      });
     }
+
   }
+
+  setPage(pageNumber){
+    this.setState({
+      pageNo: pageNumber+1
+    });
+  }
+
 
   componentDidMount() {
     axios
@@ -286,6 +297,13 @@ class Part2Cards extends Component {
           this.state.itemsPerPage,
           this.orderArray
         );
+
+        const totalPages = Math.ceil(
+          this.orderArray.length / this.state.itemsPerPage
+        );
+    
+         this.pages = Array.apply(null, {length: totalPages});
+
       } else {
         var orders = this.state.orders;
 
@@ -335,10 +353,9 @@ class Part2Cards extends Component {
       return (
         <Page title="Untracified Orders" separator>
           <Stack wrap={false} distribution="trailing">
-            
             <Stack.Item />
-              <div> Items per page</div>
-            <Stack.Item >
+            <div> Items per page</div>
+            <Stack.Item>
               <Select
                 options={[
                   { label: "10", value: 10 },
@@ -350,9 +367,10 @@ class Part2Cards extends Component {
                 value={this.state.selected}
               />
             </Stack.Item>
-            <Stack.Item>
+            <div className="pagination_stack">
+            <Stack.Item >
               <Button
-              // disabled= {this.state.buttonDisable}
+                // disabled= {this.state.buttonDisable}
                 plain
                 size="slim"
                 outline
@@ -361,9 +379,20 @@ class Part2Cards extends Component {
               >
                 <Icon source="arrowLeft" color="blue" />
               </Button>
+              {/* </Stack.Item>
+              <Stack.Item> */}
+            <ul className="paginationUl" >
+            {this.pages.map((page,index) =>
+                    <li key={index} >
+                          <a onClick={() => this.setPage(index)}>{index+1}</a>
+                    </li>
+                )}
+            </ul>
+            {/* </Stack.Item>
+              <Stack.Item> */}
               <Button
                 plain
-              // disabled= {this.state.buttonDisable}
+                // disabled= {this.state.buttonDisable}
                 size="slim"
                 outline
                 onClick={this.selectNextPage}
@@ -372,6 +401,7 @@ class Part2Cards extends Component {
                 <Icon source="arrowRight" color="blue" />
               </Button>
             </Stack.Item>
+            </div>
           </Stack>
           <div style={{ paddingBottom: 5 }}>
             <Stack alignment="center">
