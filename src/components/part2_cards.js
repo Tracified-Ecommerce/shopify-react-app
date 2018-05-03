@@ -50,6 +50,40 @@ class Part2Cards extends Component {
     this.totalPages;
   }
 
+  componentDidMount() {
+    axios
+      .get(
+        "https://tracified-react-api.herokuapp.com/shopify/shop-api/products"
+      )
+      .then(response => {
+        const products = response.data.products;
+        this.setState({ products: response.data.products });
+      })
+      .catch(err => {
+        console.log("error in shopAPI call : " + err);
+      });
+    axios
+      .get("https://tracified-react-api.herokuapp.com/shopify/shop-api/orders")
+      .then(response => {
+        let arr = [];
+        response.data.orders.forEach(order => {
+          arr.push(false);
+        });
+
+        this.setState({
+          orders: response.data.orders,
+          isOrderListLoading: false,
+          cardStateArray: arr
+        });
+      })
+      .catch(err => {
+        // this.setState({
+        //     isError:true,
+        //     isOrderListLoading:false
+        // });
+      });
+  }
+
   handleChange = (newValue, id) => {
     this.setState({ selected: newValue });
 
@@ -123,40 +157,6 @@ class Part2Cards extends Component {
     });
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        "https://tracified-react-api.herokuapp.com/shopify/shop-api/products"
-      )
-      .then(response => {
-        const products = response.data.products;
-        this.setState({ products: response.data.products });
-      })
-      .catch(err => {
-        console.log("error in shopAPI call : " + err);
-      });
-    axios
-      .get("https://tracified-react-api.herokuapp.com/shopify/shop-api/orders")
-      .then(response => {
-        let arr = [];
-        response.data.orders.forEach(order => {
-          arr.push(false);
-        });
-
-        this.setState({
-          orders: response.data.orders,
-          isOrderListLoading: false,
-          cardStateArray: arr
-        });
-      })
-      .catch(err => {
-        // this.setState({
-        //     isError:true,
-        //     isOrderListLoading:false
-        // });
-      });
-  }
-
   updateSearch(event) {
     this.setState({
       search: event.target.value.substr(0, 20)
@@ -194,7 +194,6 @@ class Part2Cards extends Component {
       // return <ErrorMsg error={[status,ErrorMsg]}/>
     } else {
       if (this.state.isCheckedCus) {
-        console.log("cus works");
 
         let orders = this.state.orders.filter(order => {
           const customer =
@@ -208,7 +207,6 @@ class Part2Cards extends Component {
             customer.indexOf(this.state.search) !== -1
           );
         });
-        console.log(orders);
 
         this.orderArray = [];
         orders.forEach(order => {
@@ -241,9 +239,8 @@ class Part2Cards extends Component {
           this.state.itemsPerPage,
           this.orderArray
         );
-        console.log(this.orderArray);
+
       } else if (this.state.isCheckedOrd) {
-        console.log("ord works");
 
         let orders = this.state.orders.filter(order => {
           return order.name.indexOf(this.state.search) !== -1;
@@ -340,7 +337,6 @@ class Part2Cards extends Component {
         });
 
         // this.state.totalOrders = this.orderArray.length
-
         this.paginatedArray = this.paginateArray(
           this.state.pageNo,
           this.state.itemsPerPage,
@@ -433,16 +429,7 @@ class Part2Cards extends Component {
           <div className="pagination_stack">
             <Stack distribution="center">
               <Stack.Item>
-                {/* <Button
-                  // disabled= {this.state.buttonDisable}
-                  plain
-                  size="slim"
-                  outline
-                  onClick={this.selectPreviousPage}
-                  style={{ marginBottom: "1rem" }}
-                >
-                  <Icon source="arrowLeft" color="blue" />
-                </Button> */}
+                
                 <ul className="paginationUl">
                   <li className={this.state.pageNo === 1 ? "disabled" : ""}>
                     <a onClick={() => this.setPage(0)}>First</a>
@@ -468,17 +455,6 @@ class Part2Cards extends Component {
                     <a onClick={() => this.setPage(this.totalPages - 1)}>Last</a>
                   </li>
                 </ul>
-
-                {/* <Button
-                  plain
-                  // disabled= {this.state.buttonDisable}
-                  size="slim"
-                  outline
-                  onClick={this.selectNextPage}
-                  style={{ marginBottom: "1rem" }}
-                >
-                  <Icon source="arrowRight" color="blue" />
-                </Button> */}
               </Stack.Item>
             </Stack>
           </div>
